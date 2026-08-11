@@ -390,16 +390,50 @@
   .panel-head h2 { font-size: 14px; font-weight: 600; margin: 0; }
   .panel-head .hint { font-size: 12px; color: var(--text-muted); margin: 2px 0 0; }
 
-  .chips { display: flex; gap: 6px; flex-wrap: wrap; }
-  .chip {
-    font: inherit; font-size: 12px; font-weight: 600; cursor: pointer;
-    background: var(--surface-2); color: var(--text-muted);
-    border: 1px solid transparent; border-radius: 20px; padding: 5px 11px;
-    display: inline-flex; align-items: center; gap: 6px;
+  /* Underline tabs rather than pills. Pills read consumer; a provider console
+     wants the quieter pattern, with the active state carried by a rule that
+     sits on the panel's own divider. */
+  .tabstrip {
+    border-bottom: 1px solid var(--border);
+    padding: 0 16px; overflow-x: auto;
+    scrollbar-width: none;
   }
-  .chip:hover { color: var(--text); border-color: var(--border-strong); }
-  .chip[aria-pressed="true"] { background: var(--brand); color: var(--brand-fg); }
-  .chip .n { font-variant-numeric: tabular-nums; opacity: .75; }
+  .tabstrip::-webkit-scrollbar { display: none; }
+
+  .chips { display: flex; gap: 2px; }
+  .chip {
+    position: relative; flex: none;
+    font: inherit; font-size: 12.5px; font-weight: 600; cursor: pointer;
+    background: none; border: none; border-radius: 0;
+    padding: 12px 11px 11px; white-space: nowrap;
+    color: var(--text-muted);
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: color .14s ease;
+  }
+  .chip::after {
+    content: ""; position: absolute; left: 8px; right: 8px; bottom: -1px;
+    height: 2px; border-radius: 2px 2px 0 0; background: var(--accent);
+    transform: scaleX(0); transition: transform .2s cubic-bezier(.2, .75, .3, 1);
+  }
+  .chip:hover { color: var(--text); }
+  .chip[aria-pressed="true"] { color: var(--text); }
+  .chip[aria-pressed="true"]::after { transform: scaleX(1); }
+
+  /* The dot carries the same colour as that status pill in the rows, so the
+     filter row and the table read as one system. */
+  .chip-dot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
+  .chip-dot.new       { background: var(--st-new-fg); }
+  .chip-dot.contacted { background: var(--st-contacted-fg); }
+  .chip-dot.booked    { background: var(--st-booked-fg); }
+  .chip-dot.completed { background: var(--st-completed-fg); }
+
+  .chip .n {
+    font-size: 11px; font-weight: 700; font-variant-numeric: tabular-nums;
+    background: var(--surface-2); color: var(--text-muted);
+    border-radius: 20px; padding: 2px 7px; min-width: 21px; text-align: center;
+    transition: background .14s ease, color .14s ease;
+  }
+  .chip[aria-pressed="true"] .n { background: var(--accent-tint); color: var(--accent); }
 
   /* ── Table ──────────────────────────────────────────────────────── */
   .table-scroll { overflow-x: auto; }
@@ -954,14 +988,9 @@
     .panel-head { flex-direction: column; align-items: flex-start; gap: 10px; }
     .week { min-width: 460px; }
 
-    /* Status filters scroll sideways instead of wrapping onto three lines */
-    .chips {
-      flex-wrap: nowrap; overflow-x: auto; width: 100%;
-      margin: 0 -16px; padding: 0 16px 2px;
-      scrollbar-width: none;
-    }
-    .chips::-webkit-scrollbar { display: none; }
-    .chip { flex: none; }
+    /* The tab strip already scrolls sideways; just tighten it for phones */
+    .tabstrip { padding: 0 12px; }
+    .chip { padding: 11px 9px 10px; font-size: 12px; gap: 7px; }
 
     /* Lead detail drawer on phones */
     .drawer-head { padding: 14px; }
@@ -1173,6 +1202,8 @@
           <h2>Lead pipeline</h2>
           <p class="hint">Select a row to see the user's analysis, recommendations and why they were matched here.</p>
         </div>
+      </div>
+      <div class="tabstrip">
         <div class="chips" id="filters" role="group" aria-label="Filter by status"></div>
       </div>
       <div class="table-scroll">
@@ -1794,8 +1825,10 @@
       return [s, LABEL[s], countBy(s)];
     }));
     filtersEl.innerHTML = opts.map(function (o) {
+      var dot = o[0] === "all" ? "" : '<i class="chip-dot ' + o[0] + '"></i>';
       return '<button class="chip" type="button" data-filter="' + o[0] + '" aria-pressed="' +
-        (filter === o[0]) + '">' + o[1] + ' <span class="n">' + o[2] + "</span></button>";
+        (filter === o[0]) + '">' + dot + o[1] +
+        '<span class="n">' + o[2] + "</span></button>";
     }).join("");
   }
 
