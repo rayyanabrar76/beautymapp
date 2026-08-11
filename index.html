@@ -88,7 +88,11 @@
     --st-completed-fg: #9CC0A2;  --st-completed-bg: #223127;
   }
 
-  * { box-sizing: border-box; }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  /* Taps must not leave a focus ring behind; keyboard focus still shows one. */
+  :focus { outline: none; }
+  button, a, [role="switch"], [role="menuitem"], input, select { touch-action: manipulation; }
 
   body {
     margin: 0;
