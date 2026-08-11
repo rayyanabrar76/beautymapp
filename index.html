@@ -859,10 +859,16 @@
     }
     .stats::-webkit-scrollbar { display: none; }
     .tile {
-      flex: 0 0 152px; scroll-snap-align: start;
-      padding: 12px 13px 10px; gap: 6px;
+      /* Wide enough for "CONSULTATIONS BOOKED" on one line. Any narrower and
+         that label wraps, dropping its number below the others and making the
+         whole strip look misaligned. */
+      flex: 0 0 184px; scroll-snap-align: start;
+      padding: 13px 14px 11px; gap: 7px;
     }
-    .tile-label { font-size: 9.5px; }
+    .tile-label {
+      font-size: 9.5px; letter-spacing: .08em;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
     .tile-value { font-size: 23px; }
     .tile-value small { font-size: 14px; }
     .tile-delta { font-size: 10px; }
