@@ -864,12 +864,24 @@
       padding-bottom: 14px; border-bottom: 1px solid var(--border);
     }
     .mobile-brand .logo-type { font-size: 17px; }
+    /* Badge only. The name is redundant here because the menu leads with it,
+       and dropping it gives the wordmark room. Rounded square, not a circle:
+       circles are people in this interface, squares are organisations. */
     .mobile-clinic {
-      margin-left: auto; display: flex; align-items: center; gap: 7px;
-      font-family: inherit; font-size: 12px; font-weight: 600; color: var(--text-muted);
+      margin-left: auto; display: flex; align-items: center;
       background: none; border: none; padding: 0; cursor: pointer;
+      border-radius: 11px;
+      transition: box-shadow .16s ease;
     }
-    .mobile-clinic svg { color: var(--text-faint); }
+    .mobile-clinic .clinic-badge {
+      width: 36px; height: 36px; font-size: 13px; border-radius: 11px;
+      box-shadow: 0 0 0 1px var(--border);
+      transition: box-shadow .16s ease;
+    }
+    .mobile-clinic:hover .clinic-badge { box-shadow: 0 0 0 1px var(--border-strong); }
+    .mobile-clinic[aria-expanded="true"] .clinic-badge {
+      box-shadow: 0 0 0 1px var(--accent), 0 0 0 4px var(--accent-tint);
+    }
     .mobile-clinic .clinic-badge { width: 26px; height: 26px; font-size: 11px; border-radius: 7px; }
 
     .main { padding: 18px 20px 112px; gap: 18px; }
@@ -1089,9 +1101,8 @@
         <circle cx="23.4" cy="6.6" r="1.7" fill="currentColor" style="color: var(--accent)"/>
       </svg>
       <div class="logo-type"><b>Beauty</b><span>MApp</span></div>
-      <button class="mobile-clinic" id="clinic-trigger-m" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="clinic-menu">
-        <span class="clinic-badge">EB</span> Elevate Beauty
-        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4.5 6.5 3.5 3.5 3.5-3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <button class="mobile-clinic" id="clinic-trigger-m" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="clinic-menu" aria-label="Elevate Beauty - open clinic menu">
+        <span class="clinic-badge">EB</span>
       </button>
     </div>
 
