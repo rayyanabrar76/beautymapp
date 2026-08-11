@@ -1,0 +1,2096 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#4A3348">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjNEEzMzQ4Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjQzk3ODlCIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iOCIgZmlsbD0idXJsKCNnKSIvPjxwYXRoIGQ9Ik04IDIzVjEwLjZjMC0uOSAxLjEtMS4zIDEuNy0uNkwxNiAxN2w2LjMtN2MuNi0uNyAxLjctLjMgMS43LjZWMjMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIyLjciIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPgo=">
+<meta name="description" content="BeautyMApp Clinic / Provider Dashboard prototype — qualified leads, AI skin analysis, treatment recommendations, match reasoning and conversion analytics.">
+<title>BeautyMApp - Clinic Dashboard</title>
+<style>
+  /* ── Tokens: complete light palette on bare :root ───────────────── */
+  :root {
+    --bg:            #FAF7F4;
+    --surface:       #FFFFFF;
+    --surface-2:     #F4EFEC;
+    --surface-3:     #EFE8E4;
+    --border:        #E7DDD9;
+    --border-strong: #D6C9C4;
+    --text:          #2A2126;
+    --text-muted:    #857981;
+    --text-faint:    #A89DA3;
+    --brand:         #4A3348;
+    --brand-fg:      #FDFBFA;
+    --brand-tint:    #EDE4EC;
+    --accent:        #B8788C;
+    --accent-tint:   #F5E7EB;
+    --shadow:        0 1px 2px rgba(42,33,38,.05), 0 8px 24px -12px rgba(42,33,38,.14);
+    --shadow-lg:     0 2px 8px rgba(42,33,38,.08), 0 24px 48px -16px rgba(42,33,38,.22);
+
+    --st-new-fg:       #A83E5C;  --st-new-bg:       #F9E5EA;
+    --st-contacted-fg: #8E6420;  --st-contacted-bg: #F7EDDA;
+    --st-booked-fg:    #57406F;  --st-booked-bg:    #EAE4F0;
+    --st-completed-fg: #47654D;  --st-completed-bg: #E2EDE4;
+
+    --font-ui: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    --font-mono: ui-monospace, "Cascadia Mono", "Cascadia Code", Consolas, "SF Mono", monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg:            #17121A;
+      --surface:       #221A26;
+      --surface-2:     #2A2130;
+      --surface-3:     #322838;
+      --border:        #372C3D;
+      --border-strong: #4B3D52;
+      --text:          #F2E9EE;
+      --text-muted:    #A99AA4;
+      --text-faint:    #7D7079;
+      --brand:         #D9A3B6;
+      --brand-fg:      #23181F;
+      --brand-tint:    #33253A;
+      --accent:        #DBA0B3;
+      --accent-tint:   #3A2630;
+      --shadow:        0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+      --shadow-lg:     0 2px 8px rgba(0,0,0,.5), 0 24px 48px -16px rgba(0,0,0,.7);
+
+      --st-new-fg:       #F0A8BC;  --st-new-bg:       #3D2029;
+      --st-contacted-fg: #E0B871;  --st-contacted-bg: #382C1B;
+      --st-booked-fg:    #CBADDA;  --st-booked-bg:    #302442;
+      --st-completed-fg: #9CC0A2;  --st-completed-bg: #223127;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg:            #17121A;
+    --surface:       #221A26;
+    --surface-2:     #2A2130;
+    --surface-3:     #322838;
+    --border:        #372C3D;
+    --border-strong: #4B3D52;
+    --text:          #F2E9EE;
+    --text-muted:    #A99AA4;
+    --text-faint:    #7D7079;
+    --brand:         #D9A3B6;
+    --brand-fg:      #23181F;
+    --brand-tint:    #33253A;
+    --accent:        #DBA0B3;
+    --accent-tint:   #3A2630;
+    --shadow:        0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+    --shadow-lg:     0 2px 8px rgba(0,0,0,.5), 0 24px 48px -16px rgba(0,0,0,.7);
+
+    --st-new-fg:       #F0A8BC;  --st-new-bg:       #3D2029;
+    --st-contacted-fg: #E0B871;  --st-contacted-bg: #382C1B;
+    --st-booked-fg:    #CBADDA;  --st-booked-bg:    #302442;
+    --st-completed-fg: #9CC0A2;  --st-completed-bg: #223127;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-ui);
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+
+  /* ── Shell ──────────────────────────────────────────────────────── */
+  .app { display: grid; grid-template-columns: 236px minmax(0, 1fr); min-height: 100vh; }
+
+  .rail {
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 22px 16px;
+    display: flex; flex-direction: column; gap: 26px;
+    position: sticky; top: 0; height: 100vh; overflow-y: auto;
+  }
+
+  .logo { display: flex; align-items: center; gap: 9px; padding: 0 6px; }
+  .logo-mark { flex: none; }
+  .logo-type { font-family: var(--font-display); font-size: 19px; letter-spacing: -.01em; line-height: 1; }
+  .logo-type b { font-weight: 600; color: var(--text); }
+  .logo-type span { color: var(--accent); }
+  .logo-sub {
+    font-size: 9px; letter-spacing: .13em; text-transform: uppercase;
+    color: var(--text-faint); margin-top: 4px;
+  }
+
+  .clinic-card {
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 11px 12px;
+    display: flex; align-items: center; gap: 10px;
+    width: 100%; font: inherit; color: inherit; text-align: left; cursor: pointer;
+  }
+  .clinic-card:hover { border-color: var(--border-strong); background: var(--surface-3); }
+  .clinic-card[aria-expanded="true"] { border-color: var(--accent); }
+  .clinic-text { min-width: 0; flex: 1; }
+  .clinic-chev { flex: none; color: var(--text-faint); transition: transform .18s ease; }
+  .clinic-card[aria-expanded="true"] .clinic-chev { transform: rotate(180deg); }
+
+  /* Clinic account menu */
+  .menu {
+    position: fixed; z-index: 70; width: 246px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; box-shadow: var(--shadow-lg);
+    padding: 6px; display: flex; flex-direction: column; gap: 1px;
+    transform-origin: top left;
+    animation: menu-in .17s cubic-bezier(.2, .75, .3, 1);
+  }
+  .menu[hidden] { display: none; }
+  @keyframes menu-in {
+    from { opacity: 0; transform: translateY(-7px) scale(.96); }
+    to   { opacity: 1; transform: none; }
+  }
+  .menu-card { display: flex; align-items: center; gap: 10px; padding: 7px 8px 9px; }
+  .menu-sep { height: 1px; background: var(--border); margin: 5px 2px; }
+  .menu-item {
+    display: flex; align-items: center; gap: 10px; width: 100%;
+    font: inherit; font-size: 13px; color: var(--text); text-align: left;
+    background: none; border: none; border-radius: 8px;
+    padding: 8px 9px; cursor: pointer;
+  }
+  .menu-item { transition: background .13s ease, color .13s ease; }
+  .menu-item:hover { background: var(--surface-2); }
+  .menu-item:hover svg { color: var(--accent); }
+  .menu-item svg { color: var(--text-faint); flex: none; }
+  .menu-tag {
+    margin-left: auto; font-size: 11px; font-weight: 600; color: var(--text-muted);
+    background: var(--surface-3); padding: 1px 7px; border-radius: 20px;
+  }
+  .clinic-badge {
+    width: 32px; height: 32px; flex: none; border-radius: 8px;
+    background: var(--brand); color: var(--brand-fg);
+    display: grid; place-items: center;
+    font-family: var(--font-display); font-size: 14px; font-weight: 600;
+  }
+  .clinic-name { display: block; font-weight: 600; font-size: 13px; line-height: 1.25; }
+  .clinic-plan { display: block; font-size: 11px; color: var(--text-muted); }
+
+  .nav { display: flex; flex-direction: column; gap: 2px; }
+  .nav-label {
+    font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--text-faint); padding: 0 10px; margin-bottom: 8px;
+  }
+  .nav a {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 10px; border-radius: 8px;
+    color: var(--text-muted); text-decoration: none; font-size: 13px;
+  }
+  .nav a:hover { background: var(--surface-2); color: var(--text); }
+  .nav a[aria-current="page"] { background: var(--brand-tint); color: var(--text); font-weight: 600; }
+  .nav a[aria-current="page"] svg { color: var(--accent); }
+  .nav a svg { flex: none; color: var(--text-faint); }
+  .nav-count {
+    margin-left: auto; font-size: 11px; font-weight: 600;
+    background: var(--st-new-bg); color: var(--st-new-fg);
+    padding: 1px 7px; border-radius: 20px;
+  }
+
+  .rail-foot { margin-top: auto; font-size: 11px; color: var(--text-faint); padding: 0 8px; }
+  .rail-foot p { margin: 0 0 6px; }
+
+  /* ── Main ───────────────────────────────────────────────────────── */
+  .main { min-width: 0; padding: 24px 28px 56px; display: flex; flex-direction: column; gap: 22px; }
+
+  .topbar { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+  .topbar h1 { font-family: var(--font-display); font-size: 25px; font-weight: 600; margin: 0; letter-spacing: -.015em; }
+  .topbar p { margin: 3px 0 0; color: var(--text-muted); font-size: 13px; }
+  .topbar-actions { display: flex; align-items: center; gap: 8px; }
+
+  .search { position: relative; }
+  .search svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--text-faint); }
+  .search input {
+    font: inherit; font-size: 13px; color: var(--text);
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 8px 12px 8px 32px; width: 220px;
+  }
+  .search input::placeholder { color: var(--text-faint); }
+  .search input:focus { border-color: var(--accent); outline: none; }
+
+  .btn {
+    font: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
+    border-radius: 8px; padding: 8px 14px; border: 1px solid transparent;
+    display: inline-flex; align-items: center; gap: 7px;
+  }
+  .btn-primary { background: var(--brand); color: var(--brand-fg); }
+  .btn-primary:hover { filter: brightness(1.1); }
+  .btn-ghost { background: var(--surface); color: var(--text); border-color: var(--border); }
+  .btn-ghost:hover { background: var(--surface-2); }
+
+  /* ── Stat tiles ─────────────────────────────────────────────────── */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .tile {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 15px 16px 12px; box-shadow: var(--shadow);
+    display: flex; flex-direction: column; gap: 9px; min-width: 0;
+  }
+  .tile-label {
+    font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--text-muted); font-weight: 600;
+  }
+  .tile-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; }
+  .tile-value {
+    font-family: var(--font-display); font-size: 32px; font-weight: 600;
+    line-height: .95; letter-spacing: -.02em; font-variant-numeric: tabular-nums;
+  }
+  .tile-value small { font-size: 16px; font-weight: 400; color: var(--text-muted); }
+  /* Currency sits before the number and needs breathing room; %, h and × hug it */
+  .tile-value small:first-child { margin-right: 5px; }
+  .tile-value small:last-child { margin-left: 1.5px; }
+  .tile-delta { font-size: 11.5px; font-weight: 600; color: var(--st-completed-fg); white-space: nowrap; }
+  .tile-delta.flat { color: var(--text-muted); }
+  .tile-spark { display: block; width: 100%; height: 26px; }
+
+  /* ── Panels ─────────────────────────────────────────────────────── */
+  .panel {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; box-shadow: var(--shadow); overflow: hidden;
+  }
+  .panel-head {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 14px; padding: 14px 16px; border-bottom: 1px solid var(--border); flex-wrap: wrap;
+  }
+  .panel-head h2 { font-size: 14px; font-weight: 600; margin: 0; }
+  .panel-head .hint { font-size: 12px; color: var(--text-muted); margin: 2px 0 0; }
+
+  .chips { display: flex; gap: 6px; flex-wrap: wrap; }
+  .chip {
+    font: inherit; font-size: 12px; font-weight: 600; cursor: pointer;
+    background: var(--surface-2); color: var(--text-muted);
+    border: 1px solid transparent; border-radius: 20px; padding: 5px 11px;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .chip:hover { color: var(--text); border-color: var(--border-strong); }
+  .chip[aria-pressed="true"] { background: var(--brand); color: var(--brand-fg); }
+  .chip .n { font-variant-numeric: tabular-nums; opacity: .75; }
+
+  /* ── Table ──────────────────────────────────────────────────────── */
+  .table-scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; min-width: 880px; }
+  thead th {
+    text-align: left; font-size: 10.5px; font-weight: 600;
+    letter-spacing: .09em; text-transform: uppercase; color: var(--text-faint);
+    padding: 10px 16px; border-bottom: 1px solid var(--border);
+    background: var(--surface-2); white-space: nowrap;
+  }
+  tbody tr { border-bottom: 1px solid var(--border); cursor: pointer; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--surface-2); }
+  tbody tr[aria-selected="true"] { background: var(--brand-tint); }
+  tbody td { padding: 11px 16px; vertical-align: middle; }
+
+  .person { display: flex; align-items: center; gap: 10px; }
+  .avatar {
+    width: 32px; height: 32px; flex: none; border-radius: 50%;
+    background: var(--accent-tint); color: var(--accent);
+    display: grid; place-items: center; font-size: 11.5px; font-weight: 700;
+    border: 1px solid var(--border);
+  }
+  .person-name { font-weight: 600; font-size: 13px; white-space: nowrap; }
+  .person-meta { font-size: 11.5px; color: var(--text-muted); white-space: nowrap; }
+
+  .tags { display: flex; gap: 5px; flex-wrap: wrap; }
+  .tag {
+    font-size: 11px; padding: 2px 8px; border-radius: 5px;
+    background: var(--surface-3); color: var(--text-muted); white-space: nowrap;
+  }
+
+  .treat { font-size: 13px; font-weight: 500; white-space: nowrap; }
+  .treat-meta { font-size: 11.5px; color: var(--text-muted); }
+
+  .score { display: flex; align-items: center; gap: 8px; }
+  .score-bar { width: 44px; height: 5px; border-radius: 3px; background: var(--surface-3); overflow: hidden; flex: none; }
+  .score-fill { height: 100%; background: var(--accent); border-radius: 3px; }
+  .score-num { font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+  .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11.5px; font-weight: 600; padding: 3px 10px 3px 8px;
+    border-radius: 20px; white-space: nowrap;
+  }
+  .pill::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  .pill.new       { background: var(--st-new-bg);       color: var(--st-new-fg); }
+  .pill.contacted { background: var(--st-contacted-bg); color: var(--st-contacted-fg); }
+  .pill.booked    { background: var(--st-booked-bg);    color: var(--st-booked-fg); }
+  .pill.completed { background: var(--st-completed-bg); color: var(--st-completed-fg); }
+
+  .age { font-size: 12px; color: var(--text-muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .age.urgent { color: var(--st-new-fg); font-weight: 600; }
+
+  .empty { padding: 40px 16px; text-align: center; color: var(--text-muted); font-size: 13px; }
+
+  /* ── Analytics ──────────────────────────────────────────────────── */
+  .analytics { display: grid; grid-template-columns: 1.25fr 1fr; gap: 16px; align-items: start; }
+  .panel-body { padding: 16px; }
+
+  .bars { display: flex; align-items: flex-end; gap: 10px; height: 132px; }
+  .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 7px; min-width: 0; }
+  .bar-stack { width: 100%; display: flex; flex-direction: column; justify-content: flex-end; height: 108px; gap: 2px; }
+  .bar-seg { width: 100%; border-radius: 3px; }
+  .bar-seg.won { background: var(--accent); }
+  .bar-seg.rest { background: var(--surface-3); }
+  .bar-label { font-size: 10.5px; color: var(--text-faint); white-space: nowrap; }
+
+  .legend { display: flex; gap: 14px; margin-top: 14px; font-size: 11.5px; color: var(--text-muted); }
+  .legend i { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+
+  .funnel { display: flex; flex-direction: column; gap: 11px; }
+  .funnel-row { display: grid; grid-template-columns: 78px minmax(0,1fr) 30px; align-items: center; gap: 10px; }
+  .funnel-name { font-size: 12px; color: var(--text-muted); }
+  .funnel-track { height: 22px; background: var(--surface-2); border-radius: 5px; overflow: hidden; }
+  .funnel-fill { height: 100%; border-radius: 5px; transition: width .35s ease; }
+  .funnel-num { font-size: 12.5px; font-weight: 600; text-align: right; font-variant-numeric: tabular-nums; }
+
+  /* ── Drawer ─────────────────────────────────────────────────────── */
+  .scrim {
+    position: fixed; inset: 0; background: rgba(30,22,28,.34);
+    opacity: 0; pointer-events: none; transition: opacity .22s ease; z-index: 40;
+  }
+  .scrim.open { opacity: 1; pointer-events: auto; }
+
+  .drawer {
+    position: fixed; top: 0; right: 0; height: 100vh; height: 100dvh; width: min(430px, 100%);
+    background: var(--surface); border-left: 1px solid var(--border);
+    box-shadow: var(--shadow-lg); z-index: 50;
+    transform: translateX(100%); transition: transform .26s cubic-bezier(.4,0,.2,1);
+    display: flex; flex-direction: column;
+  }
+  .drawer.open { transform: none; }
+
+  .drawer-head {
+    padding: 16px 18px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: flex-start; gap: 12px;
+  }
+  .drawer-head .avatar { width: 40px; height: 40px; font-size: 13px; }
+  .drawer-title { flex: 1; min-width: 0; }
+  .drawer-title h3 { margin: 0; font-size: 16px; font-weight: 600; }
+  .drawer-title p { margin: 2px 0 0; font-size: 12px; color: var(--text-muted); }
+  .icon-btn {
+    background: none; border: none; cursor: pointer; color: var(--text-muted);
+    padding: 5px; border-radius: 6px; line-height: 0;
+  }
+  .icon-btn:hover { background: var(--surface-2); color: var(--text); }
+
+  .drawer-body {
+    overflow-y: auto; overflow-x: hidden; padding: 18px;
+    display: flex; flex-direction: column; gap: 20px; flex: 1;
+    overflow-wrap: anywhere;
+  }
+  .drawer-body > div { min-width: 0; }
+
+  .sec-title {
+    font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--text-faint); font-weight: 600; margin: 0 0 9px;
+  }
+
+  .concern { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 7px 0; border-bottom: 1px dashed var(--border); }
+  .concern:last-child { border-bottom: none; }
+  .concern-name { font-size: 13px; }
+  .sev { display: flex; align-items: center; gap: 8px; }
+  .sev-dots { display: flex; gap: 3px; }
+  .sev-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--surface-3); }
+  .sev-dot.on { background: var(--accent); }
+  .sev-text { font-size: 11.5px; color: var(--text-muted); width: 56px; text-align: right; }
+
+  .rec {
+    display: block; width: 100%; text-align: left; font: inherit; color: inherit;
+    border: 1px solid var(--border); border-radius: 10px; cursor: pointer;
+    padding: 11px 12px; margin-bottom: 8px; background: var(--surface-2);
+    transition: border-color .15s ease, background .15s ease;
+  }
+  .rec:last-child { margin-bottom: 0; }
+  .rec:hover { border-color: var(--border-strong); }
+  .rec[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-tint); }
+  .rec-badge {
+    font-size: 9.5px; letter-spacing: .09em; text-transform: uppercase; font-weight: 700;
+    color: var(--accent); margin-left: 8px;
+  }
+  .rec-why { font-size: 11.5px; color: var(--text-muted); margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--border); }
+  .propose { font-size: 12px; color: var(--text-muted); margin: 10px 0 0; }
+  .propose b { color: var(--text); font-weight: 600; }
+  .rec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+  .rec-name { font-size: 13px; font-weight: 600; }
+  .rec-fit { font-size: 11.5px; font-weight: 600; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .rec-meta { font-size: 11.5px; color: var(--text-muted); margin-top: 3px; display: flex; gap: 12px; flex-wrap: wrap; }
+
+  .match-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+  .match-list li { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; color: var(--text-muted); }
+  .match-list svg { flex: none; color: var(--st-completed-fg); margin-top: 2px; }
+  .match-list b { color: var(--text); font-weight: 600; }
+
+  .sim {
+    border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+  }
+  .sim-panes { display: grid; grid-template-columns: 1fr 1fr; height: 108px; }
+  .sim-pane { position: relative; display: grid; place-items: end start; padding: 8px 10px; }
+  .sim-pane.before { background: linear-gradient(150deg, #C7B4AE, #A08D8B); }
+  .sim-pane.after  { background: linear-gradient(150deg, #EBD9DC, #C99FAE); border-left: 1px solid rgba(255,255,255,.5); }
+  .sim-pane span {
+    font-size: 9.5px; letter-spacing: .12em; font-weight: 700; color: #fff;
+    background: rgba(40,28,34,.42); padding: 2px 7px; border-radius: 4px;
+  }
+  .sim-note { font-size: 11px; color: var(--text-muted); padding: 8px 10px; background: var(--surface-2); border-top: 1px solid var(--border); }
+
+  .kv { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; font-size: 12.5px; }
+  .kv dt { color: var(--text-muted); }
+  .kv dd { margin: 0; font-weight: 500; }
+
+  .stepper { display: flex; gap: 6px; }
+  .step {
+    flex: 1; font: inherit; font-size: 11.5px; font-weight: 600; cursor: pointer;
+    padding: 8px 4px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--surface-2); color: var(--text-muted);
+  }
+  .step:hover { border-color: var(--border-strong); color: var(--text); }
+  .step[aria-pressed="true"].new       { background: var(--st-new-bg);       color: var(--st-new-fg);       border-color: currentColor; }
+  .step[aria-pressed="true"].contacted { background: var(--st-contacted-bg); color: var(--st-contacted-fg); border-color: currentColor; }
+  .step[aria-pressed="true"].booked    { background: var(--st-booked-bg);    color: var(--st-booked-fg);    border-color: currentColor; }
+  .step[aria-pressed="true"].completed { background: var(--st-completed-bg); color: var(--st-completed-fg); border-color: currentColor; }
+
+  .drawer-foot { border-top: 1px solid var(--border); padding: 13px 18px; display: flex; gap: 8px; background: var(--surface); }
+  .drawer-foot .btn { flex: 1; justify-content: center; }
+
+  /* Keep drawer content inside the panel when it gets narrow */
+  .concern { min-width: 0; }
+  .concern-name { flex: 1; min-width: 0; }
+  .sev { flex: none; }
+  .rec-head { flex-wrap: wrap; }
+  .rec-name { min-width: 0; }
+  .rec-fit { flex: none; }
+  .match-list li { min-width: 0; }
+  .match-list li span { min-width: 0; }
+  .step { min-width: 0; }
+  .drawer-title { min-width: 0; }
+  .drawer-title h3, .drawer-title p { overflow-wrap: anywhere; }
+
+  .toast {
+    position: fixed; bottom: 22px; left: 50%; transform: translate(-50%, 14px);
+    background: var(--brand); color: var(--brand-fg);
+    padding: 10px 18px; border-radius: 20px; font-size: 13px; font-weight: 600;
+    box-shadow: var(--shadow-lg); opacity: 0; pointer-events: none;
+    transition: opacity .2s ease, transform .2s ease; z-index: 60;
+  }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+  .disclaimer {
+    font-size: 11.5px; color: var(--text-muted); line-height: 1.55;
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0; padding: 10px 12px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+
+  /* ── Views ──────────────────────────────────────────────────────── */
+  .view { display: flex; flex-direction: column; gap: 22px; }
+  .view[hidden] { display: none; }
+  .topbar-actions[hidden] { display: none; }
+  .btn[hidden] { display: none; }
+
+  .topbar-right { display: flex; align-items: center; gap: 8px; }
+  .theme-btn {
+    border: 1px solid var(--border); background: var(--surface);
+    width: 34px; height: 34px; border-radius: 8px;
+    display: grid; place-items: center; flex: none;
+  }
+  .theme-btn:hover { background: var(--surface-2); }
+
+  .seg { display: inline-flex; background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 2px; gap: 2px; }
+  .seg button {
+    font: inherit; font-size: 12px; font-weight: 600; cursor: pointer;
+    background: none; border: none; color: var(--text-muted);
+    padding: 5px 12px; border-radius: 6px;
+  }
+  .seg button:hover { color: var(--text); }
+  .seg button[aria-pressed="true"] { background: var(--brand); color: var(--brand-fg); }
+
+  .tile-foot { font-size: 11.5px; color: var(--text-muted); }
+  .tile-value small { font-size: 18px; }
+
+  /* Which treatments convert */
+  .convert-list { display: flex; flex-direction: column; gap: 13px; }
+  .convert-row { display: grid; grid-template-columns: 190px minmax(0,1fr) 64px; align-items: center; gap: 12px; }
+  .convert-name { font-size: 12.5px; font-weight: 500; }
+  .convert-track { height: 20px; background: var(--surface-2); border-radius: 5px; display: flex; overflow: hidden; }
+  .convert-seg { height: 100%; }
+  .convert-seg.won { background: var(--accent); }
+  .convert-seg.rest { background: var(--surface-3); }
+  .convert-num { font-size: 12px; color: var(--text-muted); text-align: right; font-variant-numeric: tabular-nums; }
+
+  /* Availability */
+  .slot-count { font-size: 12.5px; color: var(--text-muted); }
+  .slot-count b { color: var(--text); font-variant-numeric: tabular-nums; }
+  .week { display: grid; grid-template-columns: 74px repeat(7, minmax(0, 1fr)); gap: 6px; min-width: 560px; }
+  .week-head { font-size: 11px; color: var(--text-faint); text-align: center; padding-bottom: 2px; }
+  .week-row-label { font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; }
+  .slot {
+    height: 38px; border-radius: 7px; border: 1px solid var(--border);
+    background: var(--surface-3); cursor: pointer; padding: 0;
+  }
+  .slot:hover { border-color: var(--border-strong); }
+  .slot[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); }
+  .week-scroll { overflow-x: auto; }
+
+  .reach { display: flex; align-items: center; gap: 12px; }
+  .reach-bar { flex: 1; height: 12px; background: var(--surface-2); border-radius: 6px; overflow: hidden; }
+  .reach-fill { height: 100%; background: var(--accent); border-radius: 6px; transition: width .3s ease; }
+  .reach-num { font-family: var(--font-display); font-size: 22px; font-weight: 600; font-variant-numeric: tabular-nums; min-width: 56px; text-align: right; }
+
+  /* Forms */
+  .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .field > span { font-size: 11.5px; color: var(--text-muted); font-weight: 600; }
+  .field input, .rule-control select {
+    font: inherit; font-size: 13px; color: var(--text);
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 8px 11px; width: 100%;
+  }
+  .field input:focus, .rule-control select:focus { border-color: var(--accent); outline: none; }
+
+  .rule {
+    display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    padding: 13px 0; border-bottom: 1px solid var(--border);
+  }
+  .rule:first-child { padding-top: 0; }
+  .rule:last-child { border-bottom: none; padding-bottom: 0; }
+  .rule-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .rule-text b { font-size: 13px; font-weight: 600; }
+  .rule-text span { font-size: 12px; color: var(--text-muted); }
+  .rule-control { display: flex; align-items: center; gap: 11px; flex: none; }
+  .rule-control output { font-size: 12.5px; font-weight: 600; width: 68px; font-variant-numeric: tabular-nums; }
+
+  .rule-control input[type="range"] {
+    -webkit-appearance: none; appearance: none; width: 150px; height: 4px;
+    background: var(--surface-3); border-radius: 3px; outline: none;
+  }
+  .rule-control input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none; width: 16px; height: 16px;
+    border-radius: 50%; background: var(--accent); cursor: pointer; border: none;
+  }
+  .rule-control input[type="range"]::-moz-range-thumb {
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--accent); cursor: pointer; border: none;
+  }
+
+  .switch {
+    width: 40px; height: 23px; border-radius: 20px; padding: 0;
+    border: 1px solid var(--border-strong); background: var(--surface-3);
+    cursor: pointer; position: relative; transition: background .18s ease, border-color .18s ease;
+  }
+  .switch span {
+    position: absolute; top: 2px; left: 2px; width: 17px; height: 17px;
+    border-radius: 50%; background: var(--surface); box-shadow: 0 1px 2px rgba(0,0,0,.25);
+    transition: transform .18s ease;
+  }
+  .switch[aria-checked="true"] { background: var(--accent); border-color: var(--accent); }
+  .switch[aria-checked="true"] span { transform: translateX(17px); }
+
+  .save-row { display: flex; align-items: center; gap: 14px; }
+  .save-row .hint { font-size: 12px; color: var(--text-muted); }
+
+  @media (max-width: 1100px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .analytics { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .convert-row { grid-template-columns: 130px minmax(0,1fr) 56px; }
+  }
+  /* ── Scrollbars ─────────────────────────────────────────────────── */
+  * { scrollbar-width: thin; scrollbar-color: var(--border-strong) transparent; }
+
+  ::-webkit-scrollbar { width: 11px; height: 11px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-corner { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border-strong);
+    border: 3px solid var(--bg);
+    background-clip: padding-box;
+    border-radius: 20px;
+    min-height: 36px;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); background-clip: padding-box; }
+  ::-webkit-scrollbar-thumb:active { background: var(--brand); background-clip: padding-box; }
+
+  /* Panels sit on --surface, so the thumb's cut-out border must match it */
+  .rail::-webkit-scrollbar-thumb,
+  .drawer-body::-webkit-scrollbar-thumb,
+  .table-scroll::-webkit-scrollbar-thumb,
+  .week-scroll::-webkit-scrollbar-thumb { border-color: var(--surface); }
+
+  .rail, .drawer-body, .table-scroll, .week-scroll { scrollbar-color: var(--border-strong) transparent; }
+
+  /* Horizontal scrollers only need a slim bar */
+  .table-scroll::-webkit-scrollbar,
+  .week-scroll::-webkit-scrollbar { height: 9px; }
+  .table-scroll::-webkit-scrollbar-thumb,
+  .week-scroll::-webkit-scrollbar-thumb { border-width: 2px; }
+
+  /* ── Mobile ─────────────────────────────────────────────────────── */
+  .mobile-brand { display: none; }
+  .tabbar { display: none; }
+  .topbar-heading { min-width: 0; }
+
+  @media (max-width: 820px) {
+    .app { grid-template-columns: 1fr; }
+    .rail { display: none; }
+
+    .mobile-brand {
+      display: flex; align-items: center; gap: 9px;
+      padding-bottom: 14px; border-bottom: 1px solid var(--border);
+    }
+    .mobile-brand .logo-type { font-size: 17px; }
+    .mobile-clinic {
+      margin-left: auto; display: flex; align-items: center; gap: 7px;
+      font-family: inherit; font-size: 12px; font-weight: 600; color: var(--text-muted);
+      background: none; border: none; padding: 0; cursor: pointer;
+    }
+    .mobile-clinic svg { color: var(--text-faint); }
+    .mobile-clinic .clinic-badge { width: 26px; height: 26px; font-size: 11px; border-radius: 7px; }
+
+    .main { padding: 16px 14px 108px; gap: 18px; }
+    .topbar { align-items: flex-start; gap: 12px; }
+    .topbar h1 { font-size: 21px; }
+    .topbar p { font-size: 12.5px; }
+    .topbar-right { width: 100%; }
+    .topbar-actions { flex: 1; min-width: 0; }
+    .search { flex: 1; }
+    .search input { width: 100%; }
+
+    /* Metrics become one swipeable row so the pipeline stays near the top */
+    .stats {
+      display: flex; gap: 10px; overflow-x: auto;
+      margin: 0 -14px; padding: 0 14px 2px;
+      scroll-snap-type: x proximity;
+      scrollbar-width: none;
+    }
+    .stats::-webkit-scrollbar { display: none; }
+    .tile {
+      flex: 0 0 152px; scroll-snap-align: start;
+      padding: 12px 13px 10px; gap: 6px;
+    }
+    .tile-label { font-size: 9.5px; }
+    .tile-value { font-size: 23px; }
+    .tile-value small { font-size: 14px; }
+    .tile-delta { font-size: 10px; }
+    .tile-foot { font-size: 10.5px; }
+    .tile-spark { height: 18px; }
+    .drawer { left: 0; right: 0; width: auto; }
+
+    .rule { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .rule-control { width: 100%; }
+    .rule-control input[type="range"] { flex: 1; width: auto; }
+    .convert-row { grid-template-columns: 104px minmax(0, 1fr) 50px; }
+    .seg { width: 100%; }
+    .seg button { flex: 1; }
+    .form-grid { grid-template-columns: 1fr; }
+
+    .tabbar {
+      display: flex; position: fixed; z-index: 45;
+      left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; padding: 6px; gap: 2px;
+      box-shadow: var(--shadow-lg);
+    }
+    .tabbar button {
+      position: relative; flex: 1; min-width: 0; cursor: pointer;
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+      padding: 8px 2px 7px; border: none; background: none; border-radius: 15px;
+      font: inherit; font-size: 9.5px; font-weight: 600; color: var(--text-muted);
+    }
+    .tabbar button span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .tabbar button svg { color: var(--text-faint); }
+    .tabbar button[aria-current="page"] { background: var(--brand-tint); color: var(--text); }
+    .tabbar button[aria-current="page"] svg { color: var(--accent); }
+    .tab-dot {
+      position: absolute; top: 5px; left: 50%; margin-left: 6px;
+      width: 7px; height: 7px; border-radius: 50%; background: var(--st-new-fg);
+    }
+    .tab-dot[hidden] { display: none; }
+  }
+
+  /* Table rows become cards on phones */
+  @media (max-width: 700px) {
+    .table-scroll { overflow-x: visible; }
+    table { min-width: 0; display: block; }
+    thead { display: none; }
+    tbody { display: flex; flex-direction: column; gap: 10px; padding: 12px; }
+    tbody tr {
+      display: block; position: relative; border: 1px solid var(--border);
+      border-radius: 12px; padding: 12px 13px; background: var(--surface);
+    }
+    tbody tr:hover, tbody tr[aria-selected="true"] { background: var(--surface-2); }
+    tbody td {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 12px; padding: 5px 0; border: none;
+    }
+    tbody td::before {
+      content: attr(data-label); flex: none;
+      font-size: 10px; letter-spacing: .07em; text-transform: uppercase;
+      color: var(--text-faint); font-weight: 600;
+    }
+    tbody td.td-main { display: block; padding: 0 0 9px; }
+    tbody td.td-main::before { content: none; }
+    tbody td.td-status { position: absolute; top: 12px; right: 13px; padding: 0; }
+    tbody td.td-status::before { content: none; }
+    tbody td .tags { justify-content: flex-end; }
+    tbody td .score { justify-content: flex-end; }
+    .person-name { max-width: 52vw; overflow: hidden; text-overflow: ellipsis; }
+    .treat { white-space: normal; text-align: right; }
+    .treat-meta { text-align: right; }
+    .panel-head { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .week { min-width: 460px; }
+
+    /* Status filters scroll sideways instead of wrapping onto three lines */
+    .chips {
+      flex-wrap: nowrap; overflow-x: auto; width: 100%;
+      margin: 0 -16px; padding: 0 16px 2px;
+      scrollbar-width: none;
+    }
+    .chips::-webkit-scrollbar { display: none; }
+    .chip { flex: none; }
+
+    /* Lead detail drawer on phones */
+    .drawer-head { padding: 14px; }
+    .drawer-body { padding: 16px 14px; gap: 18px; }
+    .drawer-foot { padding: 12px 14px calc(12px + env(safe-area-inset-bottom, 0px)); }
+    .stepper { gap: 4px; }
+    .step { font-size: 10.5px; padding: 8px 1px; border-radius: 7px; }
+    .rec-meta { gap: 8px; }
+    .sev-text { width: 50px; }
+    .kv { grid-template-columns: 1fr; gap: 2px 0; }
+    .kv dt { font-size: 11px; margin-top: 7px; }
+    .drawer-title h3 { font-size: 15px; }
+    .drawer-title p { font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- ── Sidebar ─────────────────────────────────────────────────── -->
+  <aside class="rail" id="rail">
+    <div>
+      <div class="logo">
+        <svg class="logo-mark" width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
+          <path d="M4 24V8.5c0-.8 1-1.2 1.5-.5L11 16l5.5-8c.5-.7 1.5-.3 1.5.5V24" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" style="color: var(--brand)"/>
+          <path d="M20.5 24c4-1.2 6.5-4.6 6.5-8.6 0-3.3-2-6-4.8-6.9" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" style="color: var(--accent)"/>
+          <circle cx="23.4" cy="6.6" r="1.7" fill="currentColor" style="color: var(--accent)"/>
+        </svg>
+        <div>
+          <div class="logo-type"><b>Beauty</b><span>MApp</span></div>
+          <div class="logo-sub">Provider Console</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="clinic-card" id="clinic-trigger" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="clinic-menu">
+      <span class="clinic-badge">EB</span>
+      <span class="clinic-text">
+        <span class="clinic-name">Elevate Beauty</span>
+        <span class="clinic-plan">Belgrade · Partner clinic</span>
+      </span>
+      <svg class="clinic-chev" width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4.5 6.5 3.5 3.5 3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+
+    <nav class="nav" aria-label="Main" id="nav">
+      <div class="nav-label">Workspace</div>
+      <a href="#leads" data-view="leads" aria-current="page">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        Leads <span class="nav-count" id="nav-new">5</span>
+      </a>
+      <a href="#performance" data-view="performance">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13V7M8 13V3M13 13v-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        Performance
+      </a>
+      <a href="#catalogue" data-view="catalogue">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2.5 9.6 6l3.9.4-2.9 2.5.9 3.7L8 10.7 4.5 12.6l.9-3.7L2.5 6.4 6.4 6 8 2.5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+        Treatment catalogue
+      </a>
+      <a href="#availability" data-view="availability">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2.5" y="3.5" width="11" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 6.5h11M5.5 2v2.5M10.5 2v2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Availability
+      </a>
+      <a href="#settings" data-view="settings">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="2.2" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.8v1.6M8 12.6v1.6M14.2 8h-1.6M3.4 8H1.8M12.4 3.6l-1.1 1.1M4.7 11.3l-1.1 1.1M12.4 12.4l-1.1-1.1M4.7 4.7 3.6 3.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Settings
+      </a>
+    </nav>
+
+    <div class="rail-foot">
+      <p><b>Prototype</b> — illustrative data, not live patient records.</p>
+      <p>BeautyMApp for Providers · v0.1</p>
+    </div>
+  </aside>
+
+  <!-- ── Main ────────────────────────────────────────────────────── -->
+  <main class="main">
+    <div class="mobile-brand">
+      <svg width="26" height="26" viewBox="0 0 30 30" fill="none" aria-hidden="true">
+        <path d="M4 24V8.5c0-.8 1-1.2 1.5-.5L11 16l5.5-8c.5-.7 1.5-.3 1.5.5V24" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" style="color: var(--brand)"/>
+        <path d="M20.5 24c4-1.2 6.5-4.6 6.5-8.6 0-3.3-2-6-4.8-6.9" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" style="color: var(--accent)"/>
+        <circle cx="23.4" cy="6.6" r="1.7" fill="currentColor" style="color: var(--accent)"/>
+      </svg>
+      <div class="logo-type"><b>Beauty</b><span>MApp</span></div>
+      <button class="mobile-clinic" id="clinic-trigger-m" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="clinic-menu">
+        <span class="clinic-badge">EB</span> Elevate Beauty
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4.5 6.5 3.5 3.5 3.5-3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+
+    <div class="topbar">
+      <div class="topbar-heading">
+        <h1 id="page-title">Consultation requests</h1>
+        <p id="page-sub">Users who completed an AI skin analysis and asked to be seen at Elevate Beauty.</p>
+      </div>
+      <div class="topbar-right">
+      <div class="topbar-actions" id="topbar-actions">
+        <div class="search">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="4.5" stroke="currentColor" stroke-width="1.6"/><path d="m10.5 10.5 3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <input type="search" id="search" placeholder="Search name, concern, treatment" aria-label="Search leads">
+        </div>
+        <button class="btn btn-ghost" id="export">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2v8m0 0L5 7m3 3 3-3M3 13h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Export
+        </button>
+      </div>
+      <button class="icon-btn theme-btn" id="theme-toggle" type="button" aria-label="Switch to light theme" title="Switch theme"></button>
+      </div>
+    </div>
+
+    <div class="view" data-view="leads">
+    <section class="stats" aria-label="Summary">
+      <div class="tile">
+        <div class="tile-label">Leads received</div>
+        <div class="tile-row">
+          <div class="tile-value" id="s-leads">16</div>
+          <div class="tile-delta">+31% vs. July</div>
+        </div>
+        <svg class="tile-spark" viewBox="0 0 100 26" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 21 14 19 29 20 43 14 57 15 71 9 86 7 100 3 100 26 0 26Z" fill="var(--accent)" opacity=".13"/>
+          <polyline points="0,21 14,19 29,20 43,14 57,15 71,9 86,7 100,3" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+          <circle cx="100" cy="3" r="2.2" fill="var(--accent)"/>
+        </svg>
+      </div>
+
+      <div class="tile">
+        <div class="tile-label">Consultations booked</div>
+        <div class="tile-row">
+          <div class="tile-value" id="s-booked">5</div>
+          <div class="tile-delta">+2 this week</div>
+        </div>
+        <svg class="tile-spark" viewBox="0 0 100 26" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 22 14 22 29 17 43 18 57 12 71 13 86 8 100 6 100 26 0 26Z" fill="var(--accent)" opacity=".13"/>
+          <polyline points="0,22 14,22 29,17 43,18 57,12 71,13 86,8 100,6" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+          <circle cx="100" cy="6" r="2.2" fill="var(--accent)"/>
+        </svg>
+      </div>
+
+      <div class="tile">
+        <div class="tile-label">Lead → booking rate</div>
+        <div class="tile-row">
+          <div class="tile-value" id="s-rate">31<small>%</small></div>
+          <div class="tile-delta">+6 pts</div>
+        </div>
+        <svg class="tile-spark" viewBox="0 0 100 26" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 18 14 20 29 16 43 17 57 11 71 12 86 9 100 7 100 26 0 26Z" fill="var(--accent)" opacity=".13"/>
+          <polyline points="0,18 14,20 29,16 43,17 57,11 71,12 86,9 100,7" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+          <circle cx="100" cy="7" r="2.2" fill="var(--accent)"/>
+        </svg>
+      </div>
+
+      <div class="tile">
+        <div class="tile-label">Median response time</div>
+        <div class="tile-row">
+          <div class="tile-value">4.2<small>h</small></div>
+          <div class="tile-delta flat">Target under 6h</div>
+        </div>
+        <svg class="tile-spark" viewBox="0 0 100 26" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 6 14 8 29 7 43 12 57 11 71 16 86 15 100 19 100 26 0 26Z" fill="var(--accent)" opacity=".13"/>
+          <polyline points="0,6 14,8 29,7 43,12 57,11 71,16 86,15 100,19" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+          <circle cx="100" cy="19" r="2.2" fill="var(--accent)"/>
+        </svg>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Lead pipeline">
+      <div class="panel-head">
+        <div>
+          <h2>Lead pipeline</h2>
+          <p class="hint">Select a row to see the user's analysis, recommendations and why they were matched here.</p>
+        </div>
+        <div class="chips" id="filters" role="group" aria-label="Filter by status"></div>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">User</th>
+              <th scope="col">Primary concerns</th>
+              <th scope="col">Top recommendation</th>
+              <th scope="col">Match</th>
+              <th scope="col">Waiting</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+      <div class="empty" id="empty" hidden>No leads match that filter.</div>
+    </section>
+    </div>
+
+    <div class="view" data-view="performance" hidden>
+    <section class="stats" aria-label="Revenue summary">
+      <div class="tile">
+        <div class="tile-label">Revenue attributed</div>
+        <div class="tile-row">
+          <div class="tile-value"><small>€</small>4,180</div>
+          <div class="tile-delta">+€1,240</div>
+        </div>
+        <div class="tile-foot">From 5 booked or completed leads</div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">Average treatment value</div>
+        <div class="tile-row">
+          <div class="tile-value"><small>€</small>836</div>
+          <div class="tile-delta flat">Across all courses</div>
+        </div>
+        <div class="tile-foot">Full course, not per session</div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">Cost per booked lead</div>
+        <div class="tile-row">
+          <div class="tile-value"><small>€</small>29</div>
+          <div class="tile-delta">−€11 vs. July</div>
+        </div>
+        <div class="tile-foot">Versus €140 on paid social</div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">Return on spend</div>
+        <div class="tile-row">
+          <div class="tile-value">28<small>×</small></div>
+          <div class="tile-delta">+6×</div>
+        </div>
+        <div class="tile-foot">Revenue per €1 of lead fees</div>
+      </div>
+    </section>
+
+    <section class="analytics" id="analytics">
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Leads per week</h2>
+            <p class="hint">Last eight weeks, split by outcome.</p>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="bars" id="bars"></div>
+          <div class="legend">
+            <span><i style="background: var(--accent)"></i>Booked or completed</span>
+            <span><i style="background: var(--surface-3)"></i>Not yet converted</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Pipeline conversion</h2>
+            <p class="hint">Current month, updates as you work the list.</p>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="funnel" id="funnel"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div>
+          <h2>Which treatments convert</h2>
+          <p class="hint">Leads matched to each treatment, and how many became bookings.</p>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="convert-list" id="convert"></div>
+      </div>
+    </section>
+    </div>
+
+    <!-- ── Treatment catalogue ───────────────────────────────────── -->
+    <div class="view" data-view="catalogue" hidden>
+      <p class="disclaimer">
+        This list is what BeautyMApp matches against. If a treatment is paused, users looking for
+        it are routed to another clinic instead — so this page directly controls the leads you receive.
+      </p>
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Treatments you offer</h2>
+            <p class="hint">Toggle a treatment to start or stop receiving those leads.</p>
+          </div>
+          <button class="btn btn-ghost" id="add-treatment">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            Add treatment
+          </button>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Treatment</th>
+                <th scope="col">Category</th>
+                <th scope="col">Price band</th>
+                <th scope="col">Course</th>
+                <th scope="col">Leads matched</th>
+                <th scope="col">Accepting</th>
+              </tr>
+            </thead>
+            <tbody id="cat-rows"></tbody>
+          </table>
+        </div>
+        <div class="empty" id="cat-empty" hidden>No treatments match that search.</div>
+      </section>
+    </div>
+
+    <!-- ── Availability ──────────────────────────────────────────── -->
+    <div class="view" data-view="availability" hidden>
+      <p class="disclaimer">
+        Users tell BeautyMApp when they are free. We only show them clinics whose open slots overlap —
+        so widening your availability widens the pool of leads you can be matched to.
+      </p>
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Consultation slots</h2>
+            <p class="hint">Select the blocks you can take consultations in.</p>
+          </div>
+          <div class="slot-count"><b id="slot-n">0</b> blocks open</div>
+        </div>
+        <div class="panel-body">
+          <div class="week-scroll"><div class="week" id="week"></div></div>
+          <div class="legend">
+            <span><i style="background: var(--accent)"></i>Open for consultations</span>
+            <span><i style="background: var(--surface-3)"></i>Closed</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Reach at current availability</h2>
+            <p class="hint">Share of BeautyMApp users in your area whose free time overlaps yours.</p>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="reach">
+            <div class="reach-bar"><div class="reach-fill" id="reach-fill"></div></div>
+            <div class="reach-num" id="reach-num">0%</div>
+          </div>
+          <p class="hint" id="reach-hint" style="margin-top:10px">—</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- ── Settings ──────────────────────────────────────────────── -->
+    <div class="view" data-view="settings" hidden>
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Clinic profile</h2>
+            <p class="hint">What users see when BeautyMApp suggests your clinic.</p>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="form-grid">
+            <label class="field">
+              <span>Clinic name</span>
+              <input type="text" value="Elevate Beauty">
+            </label>
+            <label class="field">
+              <span>City</span>
+              <input type="text" value="Belgrade">
+            </label>
+            <label class="field">
+              <span>Address</span>
+              <input type="text" value="Kneza Miloša 42">
+            </label>
+            <label class="field">
+              <span>Lead contact</span>
+              <input type="email" value="prijem@elevatebeauty.rs">
+            </label>
+            <label class="field">
+              <span>Phone</span>
+              <input type="tel" value="+381 11 555 0142">
+            </label>
+            <label class="field">
+              <span>Lead clinician</span>
+              <input type="text" value="Dr. Petrović">
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Matching rules</h2>
+            <p class="hint">These decide which consultation requests reach you. They are the inputs behind “Why this lead was matched to you”.</p>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="rule">
+            <div class="rule-text">
+              <b>Maximum distance</b>
+              <span>Only match users within this radius of the clinic.</span>
+            </div>
+            <div class="rule-control">
+              <input type="range" id="radius" min="2" max="40" value="10" aria-label="Maximum distance in kilometres">
+              <output id="radius-out">10 km</output>
+            </div>
+          </div>
+
+          <div class="rule">
+            <div class="rule-text">
+              <b>Price band</b>
+              <span>Skip users whose stated budget is below your entry price.</span>
+            </div>
+            <div class="rule-control">
+              <select id="band">
+                <option>Budget · under €150</option>
+                <option selected>Mid · €150–€600</option>
+                <option>Premium · €600+</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="rule">
+            <div class="rule-text">
+              <b>Accept video consultations</b>
+              <span>Lets users outside your radius book a first call.</span>
+            </div>
+            <div class="rule-control"><button class="switch" type="button" role="switch" aria-checked="true" aria-label="Accept video consultations"><span></span></button></div>
+          </div>
+
+          <div class="rule">
+            <div class="rule-text">
+              <b>Auto-accept high-match leads</b>
+              <span>Requests above 90% match are accepted without review.</span>
+            </div>
+            <div class="rule-control"><button class="switch" type="button" role="switch" aria-checked="false" aria-label="Auto-accept high-match leads"><span></span></button></div>
+          </div>
+
+          <div class="rule">
+            <div class="rule-text">
+              <b>Weekly lead cap</b>
+              <span>Stop matching once you hit this many new requests.</span>
+            </div>
+            <div class="rule-control">
+              <input type="range" id="cap" min="5" max="60" value="25" aria-label="Weekly lead cap">
+              <output id="cap-out">25 leads</output>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Notifications</h2>
+            <p class="hint">How your front desk hears about a new request.</p>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="rule">
+            <div class="rule-text"><b>Email on new lead</b><span>Sent to the lead contact above.</span></div>
+            <div class="rule-control"><button class="switch" type="button" role="switch" aria-checked="true" aria-label="Email on new lead"><span></span></button></div>
+          </div>
+          <div class="rule">
+            <div class="rule-text"><b>SMS for urgent requests</b><span>Users who asked to be seen this week.</span></div>
+            <div class="rule-control"><button class="switch" type="button" role="switch" aria-checked="true" aria-label="SMS for urgent requests"><span></span></button></div>
+          </div>
+          <div class="rule">
+            <div class="rule-text"><b>Daily summary at 18:00</b><span>Everything still waiting on a reply.</span></div>
+            <div class="rule-control"><button class="switch" type="button" role="switch" aria-checked="false" aria-label="Daily summary"><span></span></button></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Appearance</h2>
+            <p class="hint">How the console looks on this device.</p>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="rule">
+            <div class="rule-text">
+              <b>Theme</b>
+              <span>“System” follows your computer's light or dark setting.</span>
+            </div>
+            <div class="rule-control">
+              <div class="seg" id="theme-seg" role="group" aria-label="Theme">
+                <button type="button" data-theme-set="system" aria-pressed="true">System</button>
+                <button type="button" data-theme-set="light" aria-pressed="false">Light</button>
+                <button type="button" data-theme-set="dark" aria-pressed="false">Dark</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="save-row">
+        <button class="btn btn-primary" id="save-settings">Save changes</button>
+        <span class="hint">Prototype — changes are not stored.</span>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="menu" id="clinic-menu" role="menu" aria-label="Clinic" hidden>
+  <div class="menu-card">
+    <span class="clinic-badge">EB</span>
+    <span class="clinic-text">
+      <span class="clinic-name">Elevate Beauty</span>
+      <span class="clinic-plan">Kneza Miloša 42, Belgrade</span>
+    </span>
+  </div>
+  <div class="menu-sep"></div>
+  <button class="menu-item" type="button" role="menuitem" data-act="profile">
+    <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="5.6" r="2.6" stroke="currentColor" stroke-width="1.5"/><path d="M3 13.4c.7-2.3 2.6-3.5 5-3.5s4.3 1.2 5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    Clinic profile
+  </button>
+  <button class="menu-item" type="button" role="menuitem" data-act="team">
+    <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="2.3" stroke="currentColor" stroke-width="1.5"/><path d="M1.8 13c.6-2 2.2-3.1 4.2-3.1S9.6 11 10.2 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M10.8 4.2a2.3 2.3 0 0 1 0 4.4M11.6 9.9c1.4.3 2.3 1.4 2.7 3.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    Team &amp; access
+    <span class="menu-tag">3</span>
+  </button>
+  <button class="menu-item" type="button" role="menuitem" data-act="billing">
+    <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2" y="4" width="12" height="8.5" rx="1.8" stroke="currentColor" stroke-width="1.5"/><path d="M2 7h12" stroke="currentColor" stroke-width="1.5"/></svg>
+    Billing &amp; lead fees
+  </button>
+  <div class="menu-sep"></div>
+  <button class="menu-item" type="button" role="menuitem" data-act="signout">
+    <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6.5 13.5H3.8c-.7 0-1.3-.6-1.3-1.3V3.8c0-.7.6-1.3 1.3-1.3h2.7M10.5 11 13.5 8l-3-3M13.5 8H6.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Sign out
+  </button>
+</div>
+
+<nav class="tabbar" id="tabbar" aria-label="Sections">
+  <button type="button" data-view="leads" aria-current="page">
+    <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <span>Leads</span>
+    <i class="tab-dot" id="tab-dot"></i>
+  </button>
+  <button type="button" data-view="performance">
+    <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13V7M8 13V3M13 13v-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <span>Stats</span>
+  </button>
+  <button type="button" data-view="catalogue">
+    <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2.5 9.6 6l3.9.4-2.9 2.5.9 3.7L8 10.7 4.5 12.6l.9-3.7L2.5 6.4 6.4 6 8 2.5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+    <span>Treatments</span>
+  </button>
+  <button type="button" data-view="availability">
+    <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2.5" y="3.5" width="11" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 6.5h11M5.5 2v2.5M10.5 2v2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <span>Hours</span>
+  </button>
+  <button type="button" data-view="settings">
+    <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="2.2" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.8v1.6M8 12.6v1.6M14.2 8h-1.6M3.4 8H1.8M12.4 3.6l-1.1 1.1M4.7 11.3l-1.1 1.1M12.4 12.4l-1.1-1.1M4.7 4.7 3.6 3.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <span>Settings</span>
+  </button>
+</nav>
+
+<div class="scrim" id="scrim"></div>
+
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="d-name" aria-hidden="true">
+  <div class="drawer-head">
+    <div class="avatar" id="d-avatar">—</div>
+    <div class="drawer-title">
+      <h3 id="d-name">—</h3>
+      <p id="d-meta">—</p>
+    </div>
+    <button class="icon-btn" id="d-close" aria-label="Close panel">
+      <svg width="17" height="17" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+
+  <div class="drawer-body">
+    <div>
+      <h4 class="sec-title">Status</h4>
+      <div class="stepper" id="d-stepper" role="group" aria-label="Lead status"></div>
+    </div>
+
+    <div>
+      <h4 class="sec-title">AI skin analysis</h4>
+      <div id="d-concerns"></div>
+    </div>
+
+    <div>
+      <h4 class="sec-title">Simulation the user saw</h4>
+      <div class="sim">
+        <div class="sim-panes">
+          <div class="sim-pane before"><span>BEFORE</span></div>
+          <div class="sim-pane after"><span>AFTER</span></div>
+        </div>
+        <div class="sim-note" id="d-simnote">—</div>
+      </div>
+    </div>
+
+    <div>
+      <h4 class="sec-title">Recommended treatments</h4>
+      <div id="d-recs"></div>
+      <p class="propose" id="d-propose">—</p>
+    </div>
+
+    <div>
+      <h4 class="sec-title">Why this lead was matched to you</h4>
+      <ul class="match-list" id="d-match"></ul>
+    </div>
+
+    <div>
+      <h4 class="sec-title">User preferences</h4>
+      <dl class="kv" id="d-prefs"></dl>
+    </div>
+
+    <p class="disclaimer">
+      Recommendations and simulated results are generated by BeautyMApp's model for illustrative purposes
+      and are not a medical diagnosis. A qualified clinician at your clinic confirms suitability at consultation.
+      Full name and contact details are released once you accept the request.
+    </p>
+  </div>
+
+  <div class="drawer-foot">
+    <button class="btn btn-ghost" id="d-decline">Not a fit</button>
+    <button class="btn btn-primary" id="d-accept">Accept &amp; contact</button>
+  </div>
+</aside>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  "use strict";
+
+  var STATUSES = ["new", "contacted", "booked", "completed"];
+  var LABEL = { new: "New", contacted: "Contacted", booked: "Booked", completed: "Completed" };
+
+  var LEADS = [
+    { id:"BM-2481", first:"Milica J.", initials:"MJ", age:34, city:"Belgrade", waited:2, status:"new", score:96,
+      concerns:[["Hyperpigmentation",3],["Uneven texture",2],["Dullness",2]],
+      recs:[["IPL Photofacial",96,"3–4 sessions","€180–€260"],["Chemical peel (mandelic)",88,"4 sessions","€90–€140"],["Vitamin C protocol",74,"Home care","€45/mo"]],
+      match:[["Offers <b>IPL Photofacial</b>","the top recommendation"],["<b>2.4 km</b> away","within her 10 km radius"],["Price band <b>€150–€300</b>","matches her stated budget"],["<b>Weekday evening</b> slots","matches her availability"]],
+      prefs:[["Budget","€200–€400"],["Availability","Weekday evenings"],["Travel","Up to 10 km"],["Previous treatments","None"]],
+      sim:"Viewed 11 Aug · Hyperpigmentation improvement, 12-week horizon" },
+
+    { id:"BM-2479", first:"Jelena P.", initials:"JP", age:41, city:"Novi Sad", waited:6, status:"new", score:93,
+      concerns:[["Fine lines",3],["Volume loss",2],["Dryness",1]],
+      recs:[["Microneedling with RF",93,"3 sessions","€220–€300"],["Dermal filler (mid-face)",85,"1 session","€350–€450"],["Hydrafacial",70,"Monthly","€80"]],
+      match:[["Offers <b>Microneedling with RF</b>","the top recommendation"],["<b>1.1 km</b> away","closest matching provider"],["Rated <b>4.8</b> by 126 users","above her 4.5 filter"],["Accepts <b>new patients</b>","confirmed 9 Aug"]],
+      prefs:[["Budget","€300–€600"],["Availability","Saturday mornings"],["Travel","Up to 15 km"],["Previous treatments","Botox, 2024"]],
+      sim:"Viewed 11 Aug · Fine line softening, 8-week horizon" },
+
+    { id:"BM-2476", first:"Ana S.", initials:"AS", age:28, city:"Belgrade", waited:9, status:"new", score:91,
+      concerns:[["Acne scarring",3],["Enlarged pores",3],["Oiliness",2]],
+      recs:[["Fractional laser resurfacing",91,"3 sessions","€400–€520"],["Microneedling",86,"4 sessions","€150–€200"],["Salicylic peel",72,"6 sessions","€70–€110"]],
+      match:[["Offers <b>fractional laser</b>","the top recommendation"],["<b>3.8 km</b> away","within her radius"],["Has <b>acne-scarring</b> case history","18 documented cases"],["Offers <b>payment plans</b>","she flagged budget sensitivity"]],
+      prefs:[["Budget","€150–€300"],["Availability","Flexible"],["Travel","Up to 12 km"],["Previous treatments","Topical retinoid"]],
+      sim:"Viewed 10 Aug · Acne scar texture, 16-week horizon" },
+
+    { id:"BM-2475", first:"Tijana M.", initials:"TM", age:37, city:"Belgrade", waited:11, status:"new", score:89,
+      concerns:[["Melasma",3],["Sun damage",2]],
+      recs:[["Cosmelan depigmentation",89,"1 course","€480–€620"],["Tranexamic mesotherapy",82,"4 sessions","€200–€280"],["SPF 50 protocol",78,"Home care","€35/mo"]],
+      match:[["Offers <b>Cosmelan</b>","the top recommendation"],["<b>4.6 km</b> away","within her radius"],["Clinician with <b>pigmentation</b> focus","Dr. Petrović"],["Consultation <b>free</b>","she filtered for this"]],
+      prefs:[["Budget","€400–€700"],["Availability","Weekday mornings"],["Travel","Up to 20 km"],["Previous treatments","Hydroquinone, 2023"]],
+      sim:"Viewed 10 Aug · Melasma evenness, 12-week horizon" },
+
+    { id:"BM-2472", first:"Nevena R.", initials:"NR", age:45, city:"Niš", waited:14, status:"new", score:84,
+      concerns:[["Skin laxity",3],["Fine lines",2],["Dullness",1]],
+      recs:[["HIFU lifting",84,"1–2 sessions","€500–€700"],["Radiofrequency lifting",79,"6 sessions","€300–€400"],["Mesotherapy",68,"4 sessions","€180"]],
+      match:[["Offers <b>HIFU lifting</b>","the top recommendation"],["<b>Video consultation</b> available","she is 190 km away"],["Rated <b>4.8</b> by 126 users","above her 4.5 filter"],["Weekend <b>availability</b>","matches her travel plan"]],
+      prefs:[["Budget","€400–€800"],["Availability","Weekends only"],["Travel","Willing to travel"],["Previous treatments","None"]],
+      sim:"Viewed 9 Aug · Jawline definition, 12-week horizon" },
+
+    { id:"BM-2468", first:"Sofija D.", initials:"SD", age:26, city:"Belgrade", waited:26, status:"contacted", score:90,
+      concerns:[["Active acne",3],["Redness",2]],
+      recs:[["LED blue light therapy",90,"8 sessions","€160–€220"],["Salicylic peel",84,"6 sessions","€70–€110"],["Barrier repair routine",76,"Home care","€50/mo"]],
+      match:[["Offers <b>LED therapy</b>","the top recommendation"],["<b>1.9 km</b> away","closest matching provider"],["Accepts <b>under-30</b> pricing","student rate available"],["Same-week <b>availability</b>","she asked for urgent"]],
+      prefs:[["Budget","€100–€250"],["Availability","Weekday afternoons"],["Travel","Up to 8 km"],["Previous treatments","Benzoyl peroxide"]],
+      sim:"Viewed 8 Aug · Active acne clearance, 10-week horizon" },
+
+    { id:"BM-2464", first:"Katarina V.", initials:"KV", age:52, city:"Novi Sad", waited:32, status:"contacted", score:88,
+      concerns:[["Volume loss",3],["Deep lines",3],["Skin laxity",2]],
+      recs:[["Dermal filler (full face)",88,"1–2 sessions","€600–€900"],["Thread lift",81,"1 session","€700–€950"],["Skin booster",73,"3 sessions","€300"]],
+      match:[["Offers <b>dermal filler</b>","the top recommendation"],["<b>Premium</b> price band","matches her budget"],["Clinician with <b>15 yrs</b> experience","she filtered for seniority"],["Private <b>consultation room</b>","she requested discretion"]],
+      prefs:[["Budget","€600–€1,200"],["Availability","Weekday mornings"],["Travel","Up to 25 km"],["Previous treatments","Filler, 2023"]],
+      sim:"Viewed 7 Aug · Mid-face volume, 4-week horizon" },
+
+    { id:"BM-2461", first:"Isidora L.", initials:"IL", age:31, city:"Belgrade", waited:38, status:"contacted", score:87,
+      concerns:[["Under-eye hollows",3],["Dark circles",2],["Dullness",1]],
+      recs:[["Tear-trough filler",87,"1 session","€320–€420"],["PRP under-eye",80,"3 sessions","€280–€360"],["Caffeine eye protocol",65,"Home care","€30/mo"]],
+      match:[["Offers <b>tear-trough filler</b>","the top recommendation"],["<b>2.4 km</b> away","within her radius"],["<b>32 under-eye</b> cases documented","above platform median"],["Evening <b>slots</b>","matches her availability"]],
+      prefs:[["Budget","€250–€500"],["Availability","Weekday evenings"],["Travel","Up to 10 km"],["Previous treatments","None"]],
+      sim:"Viewed 6 Aug · Under-eye brightening, 6-week horizon" },
+
+    { id:"BM-2457", first:"Marija T.", initials:"MT", age:39, city:"Kragujevac", waited:45, status:"contacted", score:82,
+      concerns:[["Rosacea",3],["Redness",3],["Sensitivity",2]],
+      recs:[["Vascular laser",82,"3 sessions","€260–€340"],["LED red light",75,"6 sessions","€140"],["Azelaic acid protocol",71,"Home care","€40/mo"]],
+      match:[["Offers <b>vascular laser</b>","the top recommendation"],["<b>Video consultation</b> available","she is 140 km away"],["<b>Sensitive-skin</b> protocol listed","she filtered for this"],["Free <b>patch test</b>","she requested one"]],
+      prefs:[["Budget","€200–€400"],["Availability","Saturday mornings"],["Travel","Willing to travel"],["Previous treatments","Metronidazole gel"]],
+      sim:"Viewed 5 Aug · Redness reduction, 12-week horizon" },
+
+    { id:"BM-2452", first:"Dunja K.", initials:"DK", age:24, city:"Belgrade", waited:58, status:"booked", score:92,
+      concerns:[["Enlarged pores",3],["Oiliness",3],["Uneven texture",2]],
+      recs:[["Hydrafacial",92,"Monthly","€80–€110"],["Microneedling",84,"3 sessions","€150–€200"],["Niacinamide protocol",70,"Home care","€35/mo"]],
+      match:[["Offers <b>Hydrafacial</b>","the top recommendation"],["<b>1.9 km</b> away","closest matching provider"],["Student <b>rate</b> available","she flagged budget"],["Same-week <b>availability</b>","matched instantly"]],
+      prefs:[["Budget","€80–€200"],["Availability","Flexible"],["Travel","Up to 8 km"],["Previous treatments","None"]],
+      sim:"Viewed 3 Aug · Pore refinement, 8-week horizon" },
+
+    { id:"BM-2448", first:"Anđela B.", initials:"AB", age:33, city:"Belgrade", waited:66, status:"booked", score:90,
+      concerns:[["Fine lines",2],["Forehead lines",3]],
+      recs:[["Botulinum toxin (upper face)",90,"1 session","€180–€260"],["Skin booster",76,"3 sessions","€300"],["Retinoid protocol",68,"Home care","€40/mo"]],
+      match:[["Offers <b>botulinum toxin</b>","the top recommendation"],["<b>3.1 km</b> away","within her radius"],["Rated <b>4.8</b> by 126 users","above her 4.5 filter"],["Returning <b>BeautyMApp</b> user","second booking with you"]],
+      prefs:[["Budget","€150–€350"],["Availability","Weekday evenings"],["Travel","Up to 12 km"],["Previous treatments","Botox via BeautyMApp, Mar 2026"]],
+      sim:"Viewed 1 Aug · Forehead smoothing, 3-week horizon" },
+
+    { id:"BM-2444", first:"Teodora N.", initials:"TN", age:47, city:"Novi Sad", waited:74, status:"booked", score:86,
+      concerns:[["Sun damage",3],["Hyperpigmentation",2],["Skin laxity",2]],
+      recs:[["IPL Photofacial",86,"4 sessions","€180–€260"],["Fractional laser",80,"2 sessions","€400–€520"],["SPF 50 protocol",77,"Home care","€35/mo"]],
+      match:[["Offers <b>IPL Photofacial</b>","the top recommendation"],["<b>5.2 km</b> away","within her radius"],["Clinician with <b>pigmentation</b> focus","Dr. Petrović"],["Weekday <b>morning</b> slots","matches her availability"]],
+      prefs:[["Budget","€300–€600"],["Availability","Weekday mornings"],["Travel","Up to 20 km"],["Previous treatments","Chemical peel, 2022"]],
+      sim:"Viewed 29 Jul · Sun damage evenness, 16-week horizon" },
+
+    { id:"BM-2437", first:"Jovana Ć.", initials:"JĆ", age:29, city:"Belgrade", waited:96, status:"completed", score:94,
+      concerns:[["Dullness",3],["Dehydration",2]],
+      recs:[["Hydrafacial",94,"Monthly","€80–€110"],["Mesotherapy",81,"4 sessions","€180"],["Hyaluronic protocol",72,"Home care","€38/mo"]],
+      match:[["Offers <b>Hydrafacial</b>","the top recommendation"],["<b>2.4 km</b> away","within her radius"],["Same-week <b>availability</b>","matched instantly"],["Free <b>consultation</b>","she filtered for this"]],
+      prefs:[["Budget","€80–€200"],["Availability","Weekday evenings"],["Travel","Up to 10 km"],["Previous treatments","None"]],
+      sim:"Viewed 24 Jul · Radiance and hydration, 6-week horizon" },
+
+    { id:"BM-2431", first:"Sara M.", initials:"SM", age:36, city:"Belgrade", waited:112, status:"completed", score:89,
+      concerns:[["Acne scarring",2],["Uneven texture",3]],
+      recs:[["Microneedling",89,"4 sessions","€150–€200"],["TCA peel",83,"3 sessions","€120–€180"],["Retinoid protocol",70,"Home care","€40/mo"]],
+      match:[["Offers <b>microneedling</b>","the top recommendation"],["<b>3.8 km</b> away","within her radius"],["<b>18 acne-scarring</b> cases","above platform median"],["Payment <b>plans</b> offered","she flagged budget"]],
+      prefs:[["Budget","€150–€300"],["Availability","Saturday mornings"],["Travel","Up to 12 km"],["Previous treatments","None"]],
+      sim:"Viewed 20 Jul · Texture refinement, 16-week horizon" },
+
+    { id:"BM-2427", first:"Lena V.", initials:"LV", age:43, city:"Subotica", waited:128, status:"completed", score:85,
+      concerns:[["Fine lines",3],["Dryness",2],["Dullness",2]],
+      recs:[["Skin booster",85,"3 sessions","€300–€380"],["Mesotherapy",79,"4 sessions","€180"],["Hydrafacial",71,"Monthly","€80"]],
+      match:[["Offers <b>skin boosters</b>","the top recommendation"],["<b>Video consultation</b> available","she is 175 km away"],["Weekend <b>availability</b>","matched her travel plan"],["Rated <b>4.8</b> by 126 users","above her filter"]],
+      prefs:[["Budget","€250–€500"],["Availability","Weekends only"],["Travel","Willing to travel"],["Previous treatments","None"]],
+      sim:"Viewed 16 Jul · Hydration and glow, 8-week horizon" },
+
+    { id:"BM-2422", first:"Mina A.", initials:"MA", age:30, city:"Belgrade", waited:141, status:"completed", score:91,
+      concerns:[["Hyperpigmentation",2],["Dullness",3]],
+      recs:[["Chemical peel (mandelic)",91,"4 sessions","€90–€140"],["IPL Photofacial",84,"3 sessions","€180–€260"],["Vitamin C protocol",73,"Home care","€45/mo"]],
+      match:[["Offers <b>chemical peels</b>","the top recommendation"],["<b>2.4 km</b> away","within her radius"],["Free <b>consultation</b>","she filtered for this"],["Evening <b>slots</b>","matches her availability"]],
+      prefs:[["Budget","€100–€250"],["Availability","Weekday evenings"],["Travel","Up to 10 km"],["Previous treatments","None"]],
+      sim:"Viewed 12 Jul · Tone evenness, 10-week horizon" }
+  ];
+
+  var WEEKS = [
+    { label:"16 Jun", total:7 }, { label:"23 Jun", total:9 }, { label:"30 Jun", total:8 },
+    { label:"7 Jul", total:12 }, { label:"14 Jul", total:11 }, { label:"21 Jul", total:14 },
+    { label:"28 Jul", total:13 }, { label:"4 Aug", total:16 }
+  ];
+
+  var filter = "all";
+  var query = "";
+  var selected = null;
+
+  var $ = function (id) { return document.getElementById(id); };
+  var rowsEl = $("rows"), emptyEl = $("empty"), filtersEl = $("filters");
+  var drawer = $("drawer"), scrim = $("scrim"), toastEl = $("toast");
+  var lastFocus = null, toastTimer = null;
+
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c];
+    });
+  }
+
+  function countBy(status) {
+    return LEADS.filter(function (l) { return l.status === status; }).length;
+  }
+
+  function waitText(h) {
+    if (h < 24) { return h + "h"; }
+    return Math.round(h / 24) + "d";
+  }
+
+  function visible() {
+    var q = query.trim().toLowerCase();
+    return LEADS.filter(function (l) {
+      if (filter !== "all" && l.status !== filter) { return false; }
+      if (!q) { return true; }
+      var hay = [l.first, l.city, l.id].concat(
+        l.concerns.map(function (c) { return c[0]; }),
+        l.recs.map(function (r) { return r[0]; })
+      ).join(" ").toLowerCase();
+      return hay.indexOf(q) !== -1;
+    });
+  }
+
+  function renderFilters() {
+    var opts = [["all", "All", LEADS.length]].concat(STATUSES.map(function (s) {
+      return [s, LABEL[s], countBy(s)];
+    }));
+    filtersEl.innerHTML = opts.map(function (o) {
+      return '<button class="chip" type="button" data-filter="' + o[0] + '" aria-pressed="' +
+        (filter === o[0]) + '">' + o[1] + ' <span class="n">' + o[2] + "</span></button>";
+    }).join("");
+  }
+
+  function renderRows() {
+    var list = visible();
+    emptyEl.hidden = list.length > 0;
+    rowsEl.innerHTML = list.map(function (l) {
+      var urgent = l.status === "new" && l.waited >= 8;
+      return '<tr tabindex="0" data-id="' + l.id + '" aria-selected="' + (selected === l.id) + '">' +
+        '<td class="td-main"><div class="person"><div class="avatar">' + esc(l.initials) + "</div><div>" +
+          '<div class="person-name">' + esc(l.first) + "</div>" +
+          '<div class="person-meta">' + l.age + " · " + esc(l.city) + "</div></div></div></td>" +
+        '<td data-label="Concerns"><div class="tags">' + l.concerns.slice(0, 2).map(function (c) {
+          return '<span class="tag">' + esc(c[0]) + "</span>";
+        }).join("") + (l.concerns.length > 2 ? '<span class="tag">+' + (l.concerns.length - 2) + "</span>" : "") + "</div></td>" +
+        '<td data-label="Suggested"><div><div class="treat">' + esc(l.recs[0][0]) + "</div>" +
+          '<div class="treat-meta">' + esc(l.recs[0][2]) + " · " + esc(l.recs[0][3]) + "</div></div></td>" +
+        '<td data-label="Match"><div class="score"><div class="score-bar"><div class="score-fill" style="width:' + l.score + '%"></div></div>' +
+          '<span class="score-num">' + l.score + "%</span></div></td>" +
+        '<td data-label="Waiting"><span class="age' + (urgent ? " urgent" : "") + '">' + waitText(l.waited) + "</span></td>" +
+        '<td class="td-status"><span class="pill ' + l.status + '">' + LABEL[l.status] + "</span></td></tr>";
+    }).join("");
+  }
+
+  function renderStats() {
+    var booked = countBy("booked") + countBy("completed");
+    $("s-leads").textContent = LEADS.length;
+    $("s-booked").textContent = booked;
+    $("s-rate").innerHTML = Math.round(booked / LEADS.length * 100) + "<small>%</small>";
+    $("nav-new").textContent = countBy("new");
+    $("tab-dot").hidden = countBy("new") === 0;
+  }
+
+  function renderBars() {
+    var rate = (countBy("booked") + countBy("completed")) / LEADS.length;
+    var max = 16;
+    $("bars").innerHTML = WEEKS.map(function (w, i) {
+      var won = Math.max(1, Math.round(w.total * rate * (0.7 + i * 0.06)));
+      if (won > w.total) { won = w.total; }
+      var wonH = won / max * 100, restH = (w.total - won) / max * 100;
+      return '<div class="bar-col"><div class="bar-stack">' +
+        '<div class="bar-seg rest" style="height:' + restH + '%"></div>' +
+        '<div class="bar-seg won" style="height:' + wonH + '%"></div>' +
+        '</div><div class="bar-label">' + w.label + "</div></div>";
+    }).join("");
+  }
+
+  function renderFunnel() {
+    var cum = STATUSES.map(function (s, i) {
+      return STATUSES.slice(i).reduce(function (n, k) { return n + countBy(k); }, 0);
+    });
+    var colors = ["--st-new-fg", "--st-contacted-fg", "--st-booked-fg", "--st-completed-fg"];
+    var names = ["Received", "Contacted", "Booked", "Completed"];
+    $("funnel").innerHTML = cum.map(function (n, i) {
+      return '<div class="funnel-row"><span class="funnel-name">' + names[i] + "</span>" +
+        '<div class="funnel-track"><div class="funnel-fill" style="width:' +
+        (n / LEADS.length * 100) + "%;background:var(" + colors[i] + ')"></div></div>' +
+        '<span class="funnel-num">' + n + "</span></div>";
+    }).join("");
+  }
+
+  function renderAll() {
+    renderFilters(); renderRows(); renderStats(); renderBars(); renderFunnel();
+  }
+
+  function sevText(n) { return ["", "Mild", "Moderate", "Marked"][n]; }
+
+  var chosenRec = 0;
+
+  function renderRecs(l) {
+    $("d-recs").innerHTML = l.recs.map(function (r, i) {
+      var targets = l.concerns.map(function (c) { return c[0].toLowerCase(); }).join(", ");
+      return '<button class="rec" type="button" data-rec="' + i + '" aria-pressed="' + (i === chosenRec) + '">' +
+        '<div class="rec-head"><span class="rec-name">' + esc(r[0]) +
+          (i === 0 ? '<span class="rec-badge">Best match</span>' : "") + "</span>" +
+          '<span class="rec-fit">' + r[1] + "% fit</span></div>" +
+        '<div class="rec-meta"><span>' + esc(r[2]) + "</span><span>" + esc(r[3]) + "</span></div>" +
+        (i === chosenRec
+          ? '<div class="rec-why">Targets ' + esc(targets) + ". Suitability confirmed by your clinician at consultation.</div>"
+          : "") +
+        "</button>";
+    }).join("");
+    $("d-propose").innerHTML = "Proposing <b>" + esc(l.recs[chosenRec][0]) +
+      "</b> at consultation. Select another card to change it.";
+  }
+
+  function openDrawer(id) {
+    var l = LEADS.filter(function (x) { return x.id === id; })[0];
+    if (!l) { return; }
+    selected = id;
+    lastFocus = document.activeElement;
+
+    $("d-avatar").textContent = l.initials;
+    $("d-name").textContent = l.first;
+    $("d-meta").textContent = l.id + " · " + l.age + " · " + l.city + " · requested " + waitText(l.waited) + " ago";
+    $("d-simnote").textContent = l.sim + " · AI-simulated, illustrative only";
+
+    $("d-stepper").innerHTML = STATUSES.map(function (s) {
+      return '<button class="step ' + s + '" type="button" data-status="' + s +
+        '" aria-pressed="' + (l.status === s) + '">' + LABEL[s] + "</button>";
+    }).join("");
+
+    $("d-concerns").innerHTML = l.concerns.map(function (c) {
+      var dots = [1, 2, 3].map(function (i) {
+        return '<span class="sev-dot' + (i <= c[1] ? " on" : "") + '"></span>';
+      }).join("");
+      return '<div class="concern"><span class="concern-name">' + esc(c[0]) + "</span>" +
+        '<span class="sev"><span class="sev-dots">' + dots + "</span>" +
+        '<span class="sev-text">' + sevText(c[1]) + "</span></span></div>";
+    }).join("");
+
+    chosenRec = 0;
+    renderRecs(l);
+
+    $("d-match").innerHTML = l.match.map(function (m) {
+      return "<li><svg width='13' height='13' viewBox='0 0 16 16' fill='none' aria-hidden='true'>" +
+        "<path d='m3.5 8.5 3 3 6-7' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>" +
+        "<span>" + m[0] + " — " + esc(m[1]) + "</span></li>";
+    }).join("");
+
+    $("d-prefs").innerHTML = l.prefs.map(function (p) {
+      return "<dt>" + esc(p[0]) + "</dt><dd>" + esc(p[1]) + "</dd>";
+    }).join("");
+
+    drawer.classList.add("open");
+    drawer.setAttribute("aria-hidden", "false");
+    scrim.classList.add("open");
+    renderRows();
+    $("d-close").focus();
+  }
+
+  function closeDrawer() {
+    drawer.classList.remove("open");
+    drawer.setAttribute("aria-hidden", "true");
+    scrim.classList.remove("open");
+    selected = null;
+    renderRows();
+    if (lastFocus && lastFocus.focus) { lastFocus.focus(); }
+  }
+
+  function toast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.classList.remove("show"); }, 2200);
+  }
+
+  function setStatus(id, status) {
+    var l = LEADS.filter(function (x) { return x.id === id; })[0];
+    if (!l || l.status === status) { return; }
+    l.status = status;
+    renderAll();
+    Array.prototype.forEach.call($("d-stepper").children, function (b) {
+      b.setAttribute("aria-pressed", String(b.dataset.status === status));
+    });
+    toast(l.first + " moved to " + LABEL[status]);
+  }
+
+  /* ── Events ───────────────────────────────────────────────────── */
+  filtersEl.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-filter]");
+    if (!b) { return; }
+    filter = b.dataset.filter;
+    renderFilters(); renderRows();
+  });
+
+  $("search").addEventListener("input", function (e) {
+    query = e.target.value;
+    renderRows();
+    renderCatalogue();
+  });
+
+  $("search").addEventListener("keydown", function (e) {
+    if (e.key !== "Escape" || !e.target.value) { return; }
+    e.stopPropagation();
+    e.target.value = "";
+    query = "";
+    renderRows();
+    renderCatalogue();
+  });
+
+  rowsEl.addEventListener("click", function (e) {
+    var tr = e.target.closest("tr[data-id]");
+    if (tr) { openDrawer(tr.dataset.id); }
+  });
+
+  rowsEl.addEventListener("keydown", function (e) {
+    if (e.key !== "Enter" && e.key !== " ") { return; }
+    var tr = e.target.closest("tr[data-id]");
+    if (tr) { e.preventDefault(); openDrawer(tr.dataset.id); }
+  });
+
+  $("d-stepper").addEventListener("click", function (e) {
+    var b = e.target.closest("[data-status]");
+    if (b && selected) { setStatus(selected, b.dataset.status); }
+  });
+
+  $("d-recs").addEventListener("click", function (e) {
+    var b = e.target.closest("[data-rec]");
+    if (!b || !selected) { return; }
+    chosenRec = Number(b.dataset.rec);
+    renderRecs(LEADS.filter(function (x) { return x.id === selected; })[0]);
+  });
+
+  $("d-accept").addEventListener("click", function () {
+    if (!selected) { return; }
+    var l = LEADS.filter(function (x) { return x.id === selected; })[0];
+    setStatus(selected, "contacted");
+    toast("Contact details released — proposing " + l.recs[chosenRec][0]);
+  });
+
+  $("d-decline").addEventListener("click", function () {
+    if (!selected) { return; }
+    toast("Returned to matching — we'll route this user to another clinic");
+    closeDrawer();
+  });
+
+  $("export").addEventListener("click", function () {
+    toast("Prototype — export is not wired up yet");
+  });
+
+  $("d-close").addEventListener("click", closeDrawer);
+  scrim.addEventListener("click", closeDrawer);
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "Escape") { return; }
+    if (!$("clinic-menu").hidden) {
+      var owner = document.querySelector('[aria-expanded="true"][aria-controls="clinic-menu"]');
+      closeClinicMenu();
+      if (owner) { owner.focus(); }
+      return;
+    }
+    if (drawer.classList.contains("open")) { closeDrawer(); }
+  });
+
+  /* ── Views ────────────────────────────────────────────────────── */
+  var SEARCHABLE = {
+    leads: "Search name, concern, treatment",
+    catalogue: "Search treatment, category or price"
+  };
+
+  var VIEW_META = {
+    leads:        ["Consultation requests", "Users who completed an AI skin analysis and asked to be seen at Elevate Beauty."],
+    performance:  ["Performance", "What BeautyMApp leads are worth to your clinic this month."],
+    catalogue:    ["Treatment catalogue", "What you offer decides which consultation requests we route to you."],
+    availability: ["Availability", "When you can take consultations. Users only see clinics whose slots overlap theirs."],
+    settings:     ["Settings", "Your clinic profile and the rules behind every lead match."]
+  };
+
+  function setView(v) {
+    if (!VIEW_META[v]) { v = "leads"; }
+    Array.prototype.forEach.call(document.querySelectorAll(".view"), function (el) {
+      el.hidden = el.dataset.view !== v;
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("#nav a, #tabbar button"), function (a) {
+      if (a.dataset.view === v) { a.setAttribute("aria-current", "page"); }
+      else { a.removeAttribute("aria-current"); }
+    });
+    $("page-title").textContent = VIEW_META[v][0];
+    $("page-sub").textContent = VIEW_META[v][1];
+
+    var placeholder = SEARCHABLE[v];
+    $("topbar-actions").hidden = !placeholder;
+    $("export").hidden = v !== "leads";
+    if (placeholder) {
+      $("search").placeholder = placeholder;
+      $("search").setAttribute("aria-label", placeholder);
+    }
+    query = "";
+    $("search").value = "";
+    renderRows();
+    renderCatalogue();
+
+    if (drawer.classList.contains("open")) { closeDrawer(); }
+    window.scrollTo(0, 0);
+  }
+
+  $("nav").addEventListener("click", function (e) {
+    var a = e.target.closest("a[data-view]");
+    if (!a) { return; }
+    e.preventDefault();
+    setView(a.dataset.view);
+  });
+
+  $("tabbar").addEventListener("click", function (e) {
+    var b = e.target.closest("button[data-view]");
+    if (b) { setView(b.dataset.view); }
+  });
+
+  /* ── Which treatments convert ─────────────────────────────────── */
+  var CONVERT = [
+    ["Hydrafacial", 6, 3], ["IPL Photofacial", 5, 2], ["Microneedling", 5, 2],
+    ["Chemical peel", 4, 2], ["Dermal filler", 4, 1], ["Fractional laser", 3, 1]
+  ];
+
+  function renderConvert() {
+    var max = 6;
+    $("convert").innerHTML = CONVERT.map(function (c) {
+      var wonW = c[2] / max * 100, restW = (c[1] - c[2]) / max * 100;
+      return '<div class="convert-row"><span class="convert-name">' + esc(c[0]) + "</span>" +
+        '<div class="convert-track">' +
+        '<div class="convert-seg won" style="width:' + wonW + '%"></div>' +
+        '<div class="convert-seg rest" style="width:' + restW + '%"></div></div>' +
+        '<span class="convert-num">' + c[2] + " / " + c[1] + "</span></div>";
+    }).join("");
+  }
+
+  /* ── Treatment catalogue ──────────────────────────────────────── */
+  var TREATMENTS = [
+    ["IPL Photofacial", "Light-based", "€180–€260", "3–4 sessions", 5, true],
+    ["Microneedling", "Skin needling", "€150–€200", "3–4 sessions", 5, true],
+    ["Microneedling with RF", "Skin needling", "€220–€300", "3 sessions", 2, true],
+    ["Hydrafacial", "Facial", "€80–€110", "Monthly", 6, true],
+    ["Chemical peel (mandelic)", "Peels", "€90–€140", "4 sessions", 3, true],
+    ["Salicylic peel", "Peels", "€70–€110", "6 sessions", 2, true],
+    ["TCA peel", "Peels", "€120–€180", "3 sessions", 1, true],
+    ["Cosmelan depigmentation", "Peels", "€480–€620", "1 course", 1, true],
+    ["Fractional laser resurfacing", "Laser", "€400–€520", "2–3 sessions", 3, true],
+    ["Vascular laser", "Laser", "€260–€340", "3 sessions", 1, true],
+    ["Dermal filler", "Injectable", "€320–€900", "1–2 sessions", 4, true],
+    ["Botulinum toxin", "Injectable", "€180–€260", "1 session", 2, true],
+    ["Skin booster", "Injectable", "€300–€380", "3 sessions", 2, true],
+    ["Mesotherapy", "Injectable", "€180–€280", "4 sessions", 3, true],
+    ["PRP under-eye", "Injectable", "€280–€360", "3 sessions", 1, true],
+    ["LED therapy", "Light-based", "€140–€220", "6–8 sessions", 2, true],
+    ["HIFU lifting", "Energy-based", "€500–€700", "1–2 sessions", 1, true],
+    ["Radiofrequency lifting", "Energy-based", "€300–€400", "6 sessions", 1, true],
+    ["Thread lift", "Surgical-adjacent", "€700–€950", "1 session", 1, false]
+  ];
+
+  function renderCatalogue() {
+    var q = query.trim().toLowerCase();
+    var list = TREATMENTS.filter(function (t) {
+      return !q || (t[0] + " " + t[1] + " " + t[2]).toLowerCase().indexOf(q) !== -1;
+    });
+    $("cat-empty").hidden = list.length > 0;
+    $("cat-rows").innerHTML = list.map(function (t) {
+      var i = TREATMENTS.indexOf(t);
+      return "<tr data-cat='" + i + "'>" +
+        '<td class="td-main"><div class="treat">' + esc(t[0]) + "</div></td>" +
+        '<td data-label="Category"><span class="tag">' + esc(t[1]) + "</span></td>" +
+        "<td data-label=\"Price\"><span class='treat-meta'>" + esc(t[2]) + "</span></td>" +
+        "<td data-label=\"Course\"><span class='treat-meta'>" + esc(t[3]) + "</span></td>" +
+        '<td data-label="Leads"><span class="score-num">' + (t[5] ? t[4] : "—") + "</span></td>" +
+        '<td data-label="Accepting"><button class="switch" type="button" role="switch" aria-checked="' + t[5] +
+          '" data-cat-toggle="' + i + '" aria-label="Accepting ' + esc(t[0]) + '"><span></span></button></td></tr>';
+    }).join("");
+  }
+
+  $("cat-rows").addEventListener("click", function (e) {
+    var b = e.target.closest("[data-cat-toggle]");
+    if (!b) { return; }
+    var i = Number(b.dataset.catToggle);
+    TREATMENTS[i][5] = !TREATMENTS[i][5];
+    renderCatalogue();
+    toast(TREATMENTS[i][0] + (TREATMENTS[i][5] ? " — now accepting leads" : " — paused, leads will go elsewhere"));
+  });
+
+  $("add-treatment").addEventListener("click", function () {
+    toast("Prototype — adding treatments is not wired up yet");
+  });
+
+  /* ── Availability ─────────────────────────────────────────────── */
+  var DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  var BLOCKS = ["Morning", "Afternoon", "Evening"];
+  /* Weight = share of nearby BeautyMApp users free in that block. */
+  var WEIGHT = [
+    [3, 3, 3, 3, 3, 8, 3],
+    [4, 4, 4, 4, 4, 6, 3],
+    [7, 7, 7, 7, 7, 4, 2]
+  ];
+  var open = BLOCKS.map(function (_, b) {
+    return DAYS.map(function (_, d) { return (b > 0 && d < 5) || (b === 0 && d === 5); });
+  });
+
+  function renderWeek() {
+    var html = '<div class="week-head"></div>';
+    DAYS.forEach(function (d) { html += '<div class="week-head">' + d + "</div>"; });
+    BLOCKS.forEach(function (label, b) {
+      html += '<div class="week-row-label">' + label + "</div>";
+      DAYS.forEach(function (_, d) {
+        html += '<button class="slot" type="button" aria-pressed="' + open[b][d] +
+          '" data-slot="' + b + "," + d + '" aria-label="' + label + " " + DAYS[d] + '"></button>';
+      });
+    });
+    $("week").innerHTML = html;
+    renderReach();
+  }
+
+  function renderReach() {
+    var reach = 0, count = 0, best = null;
+    BLOCKS.forEach(function (label, b) {
+      DAYS.forEach(function (_, d) {
+        if (open[b][d]) { reach += WEIGHT[b][d]; count += 1; }
+        else if (!best || WEIGHT[b][d] > best.w) { best = { w: WEIGHT[b][d], t: label + " on " + DAYS[d] }; }
+      });
+    });
+    $("slot-n").textContent = count;
+    $("reach-fill").style.width = reach + "%";
+    $("reach-num").textContent = reach + "%";
+    $("reach-hint").textContent = best
+      ? "Opening " + best.t.toLowerCase() + " would reach a further " + best.w + "% of users in your area."
+      : "You are open in every block — the widest possible match pool.";
+  }
+
+  $("week").addEventListener("click", function (e) {
+    var b = e.target.closest("[data-slot]");
+    if (!b) { return; }
+    var p = b.dataset.slot.split(",");
+    open[p[0]][p[1]] = !open[p[0]][p[1]];
+    renderWeek();
+  });
+
+  /* ── Settings ─────────────────────────────────────────────────── */
+  document.addEventListener("click", function (e) {
+    var s = e.target.closest(".switch[role='switch']");
+    if (!s || s.hasAttribute("data-cat-toggle")) { return; }
+    s.setAttribute("aria-checked", s.getAttribute("aria-checked") === "true" ? "false" : "true");
+  });
+
+  $("radius").addEventListener("input", function (e) {
+    $("radius-out").textContent = e.target.value + " km";
+  });
+  $("cap").addEventListener("input", function (e) {
+    $("cap-out").textContent = e.target.value + " leads";
+  });
+  $("save-settings").addEventListener("click", function () {
+    toast("Prototype — settings are not stored");
+  });
+
+  /* ── Clinic menu ──────────────────────────────────────────────── */
+  var clinicMenu = $("clinic-menu");
+  var menuOwner = null;
+
+  function closeClinicMenu() {
+    clinicMenu.hidden = true;
+    ["clinic-trigger", "clinic-trigger-m"].forEach(function (id) {
+      $(id).setAttribute("aria-expanded", "false");
+    });
+    menuOwner = null;
+  }
+
+  function openClinicMenu(trigger) {
+    menuOwner = trigger;
+    clinicMenu.hidden = false;
+    trigger.setAttribute("aria-expanded", "true");
+
+    var r = trigger.getBoundingClientRect();
+    var w = clinicMenu.offsetWidth;
+    var h = clinicMenu.offsetHeight;
+    var left = Math.min(Math.max(8, r.left), window.innerWidth - w - 8);
+    var top = r.bottom + 6;
+    if (top + h > window.innerHeight - 8) { top = Math.max(8, r.top - h - 6); }
+    clinicMenu.style.left = left + "px";
+    clinicMenu.style.top = top + "px";
+    clinicMenu.querySelector(".menu-item").focus();
+  }
+
+  function toggleClinicMenu(trigger) {
+    if (!clinicMenu.hidden && menuOwner === trigger) { closeClinicMenu(); }
+    else { closeClinicMenu(); openClinicMenu(trigger); }
+  }
+
+  $("clinic-trigger").addEventListener("click", function () { toggleClinicMenu(this); });
+  $("clinic-trigger-m").addEventListener("click", function () { toggleClinicMenu(this); });
+
+  clinicMenu.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-act]");
+    if (!b) { return; }
+    closeClinicMenu();
+    if (b.dataset.act === "profile") { setView("settings"); return; }
+    if (b.dataset.act === "team") { toast("Prototype — team and access is not built yet"); return; }
+    if (b.dataset.act === "billing") { toast("Prototype — billing is not built yet"); return; }
+    toast("Signed out — reload to return to the prototype");
+  });
+
+  document.addEventListener("click", function (e) {
+    if (clinicMenu.hidden) { return; }
+    if (e.target.closest("#clinic-menu, #clinic-trigger, #clinic-trigger-m")) { return; }
+    closeClinicMenu();
+  });
+
+  window.addEventListener("resize", function () { if (!clinicMenu.hidden) { closeClinicMenu(); } });
+
+  /* ── Theme ────────────────────────────────────────────────────── */
+  var SUN = "<svg width='16' height='16' viewBox='0 0 16 16' fill='none' aria-hidden='true'>" +
+    "<circle cx='8' cy='8' r='3.1' stroke='currentColor' stroke-width='1.5'/>" +
+    "<path d='M8 1.4v1.7M8 12.9v1.7M14.6 8h-1.7M3.1 8H1.4M12.7 3.3l-1.2 1.2M4.5 11.5l-1.2 1.2M12.7 12.7l-1.2-1.2M4.5 4.5 3.3 3.3' stroke='currentColor' stroke-width='1.5' stroke-linecap='round'/></svg>";
+  var MOON = "<svg width='16' height='16' viewBox='0 0 16 16' fill='none' aria-hidden='true'>" +
+    "<path d='M13.4 9.6A5.8 5.8 0 0 1 6.4 2.6a5.9 5.9 0 1 0 7 7Z' stroke='currentColor' stroke-width='1.5' stroke-linejoin='round'/></svg>";
+
+  var themePref = "system";
+  try { themePref = localStorage.getItem("bm-theme") || "system"; } catch (err) {}
+
+  function isDark() {
+    if (themePref === "dark") { return true; }
+    if (themePref === "light") { return false; }
+    return !!(window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+  }
+
+  function applyTheme(pref) {
+    themePref = pref;
+    if (pref === "system") { document.documentElement.removeAttribute("data-theme"); }
+    else { document.documentElement.setAttribute("data-theme", pref); }
+    try { localStorage.setItem("bm-theme", pref); } catch (err) {}
+
+    var dark = isDark();
+    var btn = $("theme-toggle");
+    btn.innerHTML = dark ? SUN : MOON;
+    btn.setAttribute("aria-label", dark ? "Switch to light theme" : "Switch to dark theme");
+    Array.prototype.forEach.call($("theme-seg").children, function (b) {
+      b.setAttribute("aria-pressed", String(b.dataset.themeSet === pref));
+    });
+  }
+
+  $("theme-toggle").addEventListener("click", function () {
+    applyTheme(isDark() ? "light" : "dark");
+  });
+
+  $("theme-seg").addEventListener("click", function (e) {
+    var b = e.target.closest("[data-theme-set]");
+    if (b) { applyTheme(b.dataset.themeSet); }
+  });
+
+  if (window.matchMedia) {
+    var mq = window.matchMedia("(prefers-color-scheme: dark)");
+    var onSchemeChange = function () { if (themePref === "system") { applyTheme("system"); } };
+    if (mq.addEventListener) { mq.addEventListener("change", onSchemeChange); }
+    else if (mq.addListener) { mq.addListener(onSchemeChange); }
+  }
+
+  applyTheme(themePref);
+  renderAll();
+  renderConvert();
+  renderCatalogue();
+  renderWeek();
+  setView((location.hash || "#leads").slice(1));
+})();
+</script>
+</body>
+</html>
