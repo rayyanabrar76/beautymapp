@@ -128,6 +128,66 @@
     border-radius: 3px;
   }
 
+  /* ── Splash ─────────────────────────────────────────────────────── */
+  /* Single-theme on purpose: this is the brand moment, and it should look
+     the same whatever the machine is set to. The fade is driven by CSS, not
+     JavaScript, so a script error can never leave it covering the app. */
+  .splash {
+    position: fixed; inset: 0; z-index: 100;
+    display: grid; place-items: center;
+    background: linear-gradient(150deg, #241729 0%, #33203A 52%, #1E1420 100%);
+    animation: splash-out .5s ease 1.92s forwards;
+  }
+  .splash-inner { display: flex; flex-direction: column; align-items: center; gap: 17px; }
+
+  /* The mark draws itself: white M first, then the rose arc, then the
+     sparkle. pathLength="1" normalises each path so the dash maths does
+     not depend on the real geometry. */
+  .splash-mark .draw {
+    stroke-dasharray: 1; stroke-dashoffset: 1;
+    animation: splash-draw .72s cubic-bezier(.45, 0, .2, 1) forwards;
+  }
+  .splash-mark .d1 { animation-delay: .12s; }
+  .splash-mark .d2 { animation-delay: .6s; animation-duration: .6s; }
+  .splash-mark .spark {
+    opacity: 0; transform: scale(.3);
+    transform-box: fill-box; transform-origin: center;
+    animation: splash-spark .34s cubic-bezier(.34, 1.56, .64, 1) 1.04s forwards;
+  }
+
+  .splash-text {
+    animation: splash-rise .6s cubic-bezier(.2, .75, .3, 1) .72s both;
+  }
+  .splash-type {
+    font-family: var(--font-display); font-size: 27px;
+    letter-spacing: -.015em; line-height: 1; text-align: center;
+  }
+  .splash-type b { color: #F7F1EE; font-weight: 600; }
+  .splash-type span { color: #E6AEC2; }
+  .splash-sub {
+    font-size: 9.5px; letter-spacing: .24em; text-transform: uppercase;
+    color: #B49FAC; margin-top: 7px; text-align: center;
+  }
+  .splash-bar {
+    width: 128px; height: 3px; border-radius: 3px;
+    background: rgba(255, 255, 255, .14); overflow: hidden; margin-top: 5px;
+  }
+  .splash-bar i {
+    display: block; height: 100%; border-radius: 3px;
+    background: linear-gradient(90deg, #C9789B, #E6AEC2);
+    transform: scaleX(0); transform-origin: left;
+    animation: splash-fill 1.08s cubic-bezier(.4, 0, .2, 1) .85s forwards;
+  }
+
+  @keyframes splash-draw  { to { stroke-dashoffset: 0; } }
+  @keyframes splash-spark { to { opacity: 1; transform: scale(1); } }
+  @keyframes splash-rise {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: none; }
+  }
+  @keyframes splash-fill { to { transform: scaleX(1); } }
+  @keyframes splash-out  { to { opacity: 0; visibility: hidden; } }
+
   /* ── Shell ──────────────────────────────────────────────────────── */
   .app { display: grid; grid-template-columns: 236px minmax(0, 1fr); min-height: 100vh; }
 
@@ -515,6 +575,9 @@
 
   @media (prefers-reduced-motion: reduce) {
     * { transition: none !important; animation: none !important; }
+    /* Without this the splash would never animate away and would sit
+       over the app permanently. */
+    .splash { display: none; }
   }
 
   /* ── Views ──────────────────────────────────────────────────────── */
@@ -811,6 +874,21 @@
 </style>
 </head>
 <body>
+
+<div class="splash" id="splash">
+  <div class="splash-inner">
+    <svg class="splash-mark" width="56" height="56" viewBox="0 0 30 30" fill="none" aria-hidden="true">
+      <path class="draw d1" pathLength="1" d="M4 24V8.5c0-.8 1-1.2 1.5-.5L11 16l5.5-8c.5-.7 1.5-.3 1.5.5V24" stroke="#F7F1EE" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path class="draw d2" pathLength="1" d="M20.5 24c4-1.2 6.5-4.6 6.5-8.6 0-3.3-2-6-4.8-6.9" stroke="#C9789B" stroke-width="2.2" stroke-linecap="round"/>
+      <circle class="spark" cx="23.4" cy="6.6" r="1.8" fill="#E6AEC2"/>
+    </svg>
+    <div class="splash-text">
+      <div class="splash-type"><b>Beauty</b><span>MApp</span></div>
+      <div class="splash-sub">Provider Console</div>
+    </div>
+    <div class="splash-bar"><i></i></div>
+  </div>
+</div>
 
 <div class="app">
   <!-- ── Sidebar ─────────────────────────────────────────────────── -->
@@ -2115,6 +2193,15 @@
     var onSchemeChange = function () { if (themePref === "system") { applyTheme("system"); } };
     if (mq.addEventListener) { mq.addEventListener("change", onSchemeChange); }
     else if (mq.addListener) { mq.addListener(onSchemeChange); }
+  }
+
+  /* The CSS fade already hides the splash; this takes it out of the
+     document so it can never swallow a click. */
+  var splash = $("splash");
+  if (splash) {
+    setTimeout(function () {
+      if (splash.parentNode) { splash.parentNode.removeChild(splash); }
+    }, 2500);
   }
 
   applyTheme(themePref);
