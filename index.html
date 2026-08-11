@@ -25,6 +25,17 @@
 <meta name="twitter:description" content="Every lead arrives already qualified - skin analysed, treatment identified, budget stated, and the result already seen.">
 <meta name="twitter:image" content="https://beautymapp.vercel.app/og.png">
 <meta name="twitter:image:alt" content="BeautyMApp provider console showing incoming consultation requests, booking rate and attributed revenue.">
+<script>
+  /* Runs before the page paints. Without this the splash would render in
+     the system theme for a frame, then snap to the saved choice. */
+  try {
+    var t = localStorage.getItem("bm-theme");
+    if (t === "light" || t === "dark") {
+      document.documentElement.setAttribute("data-theme", t);
+    }
+  } catch (e) {}
+</script>
+
 <title>BeautyMApp for Clinics</title>
 <style>
   /* ── Tokens: complete light palette on bare :root ───────────────── */
@@ -50,6 +61,15 @@
     --st-contacted-fg: #8E6420;  --st-contacted-bg: #F7EDDA;
     --st-booked-fg:    #57406F;  --st-booked-bg:    #EAE4F0;
     --st-completed-fg: #47654D;  --st-completed-bg: #E2EDE4;
+
+    --splash-bg:     linear-gradient(150deg, #FDFBFA 0%, #F6EDF1 52%, #EFE3E9 100%);
+    --splash-ink:    #3B2A3E;
+    --splash-accent: #B8788C;
+    --splash-sub:    #8A7B85;
+    --splash-track:  rgba(74, 51, 72, .15);
+
+    --skel-base:  #EFE7E4;
+    --skel-shine: rgba(255, 255, 255, .85);
 
     --font-ui: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
     --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
@@ -79,6 +99,15 @@
       --st-contacted-fg: #E0B871;  --st-contacted-bg: #382C1B;
       --st-booked-fg:    #CBADDA;  --st-booked-bg:    #302442;
       --st-completed-fg: #9CC0A2;  --st-completed-bg: #223127;
+
+      --splash-bg:     linear-gradient(150deg, #241729 0%, #33203A 52%, #1E1420 100%);
+      --splash-ink:    #F7F1EE;
+      --splash-accent: #E6AEC2;
+      --splash-sub:    #B49FAC;
+      --splash-track:  rgba(255, 255, 255, .14);
+
+      --skel-base:  #2C2330;
+      --skel-shine: rgba(255, 255, 255, .055);
     }
   }
 
@@ -104,6 +133,15 @@
     --st-contacted-fg: #E0B871;  --st-contacted-bg: #382C1B;
     --st-booked-fg:    #CBADDA;  --st-booked-bg:    #302442;
     --st-completed-fg: #9CC0A2;  --st-completed-bg: #223127;
+
+    --splash-bg:     linear-gradient(150deg, #241729 0%, #33203A 52%, #1E1420 100%);
+    --splash-ink:    #F7F1EE;
+    --splash-accent: #E6AEC2;
+    --splash-sub:    #B49FAC;
+    --splash-track:  rgba(255, 255, 255, .14);
+
+    --skel-base:  #2C2330;
+    --skel-shine: rgba(255, 255, 255, .055);
   }
 
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -129,13 +167,13 @@
   }
 
   /* ── Splash ─────────────────────────────────────────────────────── */
-  /* Single-theme on purpose: this is the brand moment, and it should look
-     the same whatever the machine is set to. The fade is driven by CSS, not
-     JavaScript, so a script error can never leave it covering the app. */
+  /* Themed like the rest of the app, so a light machine does not get a
+     dark flash before the dashboard appears. The fade is driven by CSS,
+     not JavaScript, so a script error can never leave it covering the app. */
   .splash {
     position: fixed; inset: 0; z-index: 100;
     display: grid; place-items: center;
-    background: linear-gradient(150deg, #241729 0%, #33203A 52%, #1E1420 100%);
+    background: var(--splash-bg);
     animation: splash-out .5s ease 1.92s forwards;
   }
   .splash-inner { display: flex; flex-direction: column; align-items: center; gap: 17px; }
@@ -147,8 +185,10 @@
     stroke-dasharray: 1; stroke-dashoffset: 1;
     animation: splash-draw .72s cubic-bezier(.45, 0, .2, 1) forwards;
   }
-  .splash-mark .d1 { animation-delay: .12s; }
-  .splash-mark .d2 { animation-delay: .6s; animation-duration: .6s; }
+  /* CSS wins over the stroke/fill presentation attributes on the SVG */
+  .splash-mark .d1 { stroke: var(--splash-ink); animation-delay: .12s; }
+  .splash-mark .d2 { stroke: var(--splash-accent); animation-delay: .6s; animation-duration: .6s; }
+  .splash-mark .spark { fill: var(--splash-accent); }
   .splash-mark .spark {
     opacity: 0; transform: scale(.3);
     transform-box: fill-box; transform-origin: center;
@@ -162,19 +202,19 @@
     font-family: var(--font-display); font-size: 27px;
     letter-spacing: -.015em; line-height: 1; text-align: center;
   }
-  .splash-type b { color: #F7F1EE; font-weight: 600; }
-  .splash-type span { color: #E6AEC2; }
+  .splash-type b { color: var(--splash-ink); font-weight: 600; }
+  .splash-type span { color: var(--splash-accent); }
   .splash-sub {
     font-size: 9.5px; letter-spacing: .24em; text-transform: uppercase;
-    color: #B49FAC; margin-top: 7px; text-align: center;
+    color: var(--splash-sub); margin-top: 7px; text-align: center;
   }
   .splash-bar {
     width: 128px; height: 3px; border-radius: 3px;
-    background: rgba(255, 255, 255, .14); overflow: hidden; margin-top: 5px;
+    background: var(--splash-track); overflow: hidden; margin-top: 5px;
   }
   .splash-bar i {
     display: block; height: 100%; border-radius: 3px;
-    background: linear-gradient(90deg, #C9789B, #E6AEC2);
+    background: linear-gradient(90deg, var(--accent), var(--splash-accent));
     transform: scaleX(0); transform-origin: left;
     animation: splash-fill 1.08s cubic-bezier(.4, 0, .2, 1) .85s forwards;
   }
@@ -257,8 +297,11 @@
     display: grid; place-items: center;
     font-family: var(--font-display); font-size: 14px; font-weight: 600;
   }
-  .clinic-name { display: block; font-weight: 600; font-size: 13px; line-height: 1.25; }
-  .clinic-plan { display: block; font-size: 11px; color: var(--text-muted); }
+  .clinic-name, .clinic-plan {
+    display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .clinic-name { font-weight: 600; font-size: 13px; line-height: 1.25; }
+  .clinic-plan { font-size: 11px; color: var(--text-muted); }
 
   .nav { display: flex; flex-direction: column; gap: 2px; }
   .nav-label {
@@ -580,6 +623,56 @@
     .splash { display: none; }
   }
 
+  /* ── Skeleton loading ───────────────────────────────────────────── */
+  .skel { display: flex; flex-direction: column; gap: 22px; }
+  .skel[hidden] { display: none; }
+
+  .skel-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .skel-tile {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 16px; box-shadow: var(--shadow);
+    display: flex; flex-direction: column; gap: 11px;
+  }
+  .skel-panel {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; box-shadow: var(--shadow); overflow: hidden;
+  }
+  .skel-panel-head {
+    padding: 15px 16px; border-bottom: 1px solid var(--border);
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .skel-rows { display: flex; flex-direction: column; }
+  .skel-row {
+    display: flex; align-items: center; gap: 14px;
+    padding: 15px 16px; border-bottom: 1px solid var(--border);
+  }
+  .skel-row:last-child { border-bottom: none; }
+  .skel-row .sk:nth-child(2) { margin-right: auto; }
+
+  .sk {
+    display: block; border-radius: 5px;
+    background: var(--skel-base);
+    position: relative; overflow: hidden;
+  }
+  .sk::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(90deg, transparent, var(--skel-shine), transparent);
+    transform: translateX(-100%);
+    animation: shimmer 1.35s infinite;
+  }
+  .sk.av { width: 32px; height: 32px; border-radius: 50%; flex: none; }
+  .sk.h6  { height: 6px; }   .sk.h8  { height: 8px; }
+  .sk.h10 { height: 10px; }  .sk.h12 { height: 12px; }
+  .sk.h22 { height: 22px; border-radius: 6px; }
+  .sk.w14 { width: 14%; }  .sk.w18 { width: 18%; }  .sk.w20 { width: 20%; }
+  .sk.w22 { width: 22%; }  .sk.w24 { width: 24%; }  .sk.w26 { width: 26%; }
+  .sk.w28 { width: 28%; }  .sk.w30 { width: 30%; }  .sk.w32 { width: 32%; }
+  .sk.w40 { width: 40%; }  .sk.w45 { width: 45%; }  .sk.w50 { width: 50%; }
+  .sk.w55 { width: 55%; }  .sk.w60 { width: 60%; }  .sk.w70 { width: 70%; }
+  .sk.w75 { width: 75%; }  .sk.w80 { width: 80%; }
+
+  @keyframes shimmer { to { transform: translateX(100%); } }
+
   /* ── Views ──────────────────────────────────────────────────────── */
   .view { display: flex; flex-direction: column; gap: 22px; }
   .view[hidden] { display: none; }
@@ -775,6 +868,12 @@
     .tile-delta { font-size: 10px; }
     .tile-foot { font-size: 10.5px; }
     .tile-spark { height: 18px; }
+
+    .skel { gap: 18px; }
+    .skel-stats { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .skel-tile { padding: 13px; gap: 9px; }
+    .skel-row { padding: 13px 14px; gap: 11px; }
+    .skel-row .sk:nth-child(n+4) { display: none; }
     .drawer { left: 0; right: 0; width: auto; }
 
     .rule { flex-direction: column; align-items: flex-start; gap: 10px; }
@@ -978,6 +1077,32 @@
         </button>
       </div>
       <button class="icon-btn theme-btn" id="theme-toggle" type="button" aria-label="Switch to light theme" title="Switch theme"></button>
+      </div>
+    </div>
+
+    <!-- Generic loading state. Every screen is tiles plus a panel of rows,
+         so one skeleton stands in for all of them. -->
+    <div class="skel" id="skel" hidden aria-hidden="true">
+      <div class="skel-stats">
+        <div class="skel-tile"><span class="sk w45 h8"></span><span class="sk w60 h22"></span><span class="sk w80 h6"></span></div>
+        <div class="skel-tile"><span class="sk w55 h8"></span><span class="sk w40 h22"></span><span class="sk w70 h6"></span></div>
+        <div class="skel-tile"><span class="sk w50 h8"></span><span class="sk w50 h22"></span><span class="sk w60 h6"></span></div>
+        <div class="skel-tile"><span class="sk w60 h8"></span><span class="sk w45 h22"></span><span class="sk w75 h6"></span></div>
+      </div>
+
+      <div class="skel-panel">
+        <div class="skel-panel-head">
+          <span class="sk w28 h12"></span>
+          <span class="sk w55 h8"></span>
+        </div>
+        <div class="skel-rows">
+          <div class="skel-row"><span class="sk av"></span><span class="sk w30 h10"></span><span class="sk w20 h10"></span><span class="sk w24 h10"></span><span class="sk w14 h10"></span></div>
+          <div class="skel-row"><span class="sk av"></span><span class="sk w26 h10"></span><span class="sk w24 h10"></span><span class="sk w20 h10"></span><span class="sk w14 h10"></span></div>
+          <div class="skel-row"><span class="sk av"></span><span class="sk w32 h10"></span><span class="sk w18 h10"></span><span class="sk w26 h10"></span><span class="sk w14 h10"></span></div>
+          <div class="skel-row"><span class="sk av"></span><span class="sk w24 h10"></span><span class="sk w26 h10"></span><span class="sk w22 h10"></span><span class="sk w14 h10"></span></div>
+          <div class="skel-row"><span class="sk av"></span><span class="sk w30 h10"></span><span class="sk w20 h10"></span><span class="sk w24 h10"></span><span class="sk w14 h10"></span></div>
+          <div class="skel-row"><span class="sk av"></span><span class="sk w28 h10"></span><span class="sk w22 h10"></span><span class="sk w20 h10"></span><span class="sk w14 h10"></span></div>
+        </div>
       </div>
     </div>
 
@@ -1913,11 +2038,31 @@
     settings:     ["Settings", "Your clinic profile and the rules behind every lead match."]
   };
 
-  function setView(v) {
-    if (!VIEW_META[v]) { v = "leads"; }
+  var skelTimer = null;
+
+  function showView(v) {
     Array.prototype.forEach.call(document.querySelectorAll(".view"), function (el) {
       el.hidden = el.dataset.view !== v;
     });
+  }
+
+  /* The chrome switches instantly and the body loads behind a skeleton, which
+     is what a screen backed by a real API would do. delay lets the first load
+     hold longer so the skeleton is still there when the splash clears. */
+  function setView(v, delay) {
+    if (!VIEW_META[v]) { v = "leads"; }
+    if (typeof delay !== "number") { delay = 420; }
+
+    Array.prototype.forEach.call(document.querySelectorAll(".view"), function (el) {
+      el.hidden = true;
+    });
+    clearTimeout(skelTimer);
+    $("skel").hidden = false;
+    skelTimer = setTimeout(function () {
+      $("skel").hidden = true;
+      showView(v);
+    }, delay);
+
     Array.prototype.forEach.call(document.querySelectorAll("#nav a, #tabbar button"), function (a) {
       if (a.dataset.view === v) { a.setAttribute("aria-current", "page"); }
       else { a.removeAttribute("aria-current"); }
@@ -2209,7 +2354,9 @@
   renderConvert();
   renderCatalogue();
   renderWeek();
-  setView((location.hash || "#leads").slice(1));
+  /* Held long enough that the skeleton is still showing when the splash
+     fades out at about 2.4s, so the two read as one loading sequence. */
+  setView((location.hash || "#leads").slice(1), 2900);
 })();
 </script>
 </body>
