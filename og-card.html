@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>BeautyMApp — social card 1200×630</title>
+<style>
+  :root {
+    --plum-deep: #1E1420;
+    --plum: #33203A;
+    --rose: #C9789B;
+    --rose-soft: #E6AEC2;
+    --ivory: #F7F1EE;
+    --muted: #B49FAC;
+    --line: rgba(233, 206, 219, .16);
+    --font-ui: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0C070E;
+    display: grid;
+    place-items: start;
+    font-family: var(--font-ui);
+  }
+
+  /* Exactly 1200 × 630 — screenshot this element */
+  .card {
+    position: relative;
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    background:
+      radial-gradient(900px 520px at 84% 18%, rgba(201, 120, 155, .30), transparent 62%),
+      radial-gradient(620px 420px at 6% 92%, rgba(150, 96, 168, .22), transparent 66%),
+      linear-gradient(142deg, #241729 0%, #33203A 48%, #1E1420 100%);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+  }
+
+  /* Fine grid texture */
+  .card::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 58px 58px;
+    opacity: .5;
+    mask-image: radial-gradient(1000px 620px at 30% 40%, #000 20%, transparent 78%);
+    -webkit-mask-image: radial-gradient(1000px 620px at 30% 40%, #000 20%, transparent 78%);
+  }
+
+  /* ── Left ───────────────────────────────────────────── */
+  .left {
+    position: relative;
+    padding: 62px 34px 54px 74px;
+    display: flex; flex-direction: column;
+  }
+
+  .brand { display: flex; align-items: center; gap: 13px; margin-bottom: 42px; }
+  .brand-type {
+    font-family: var(--font-display);
+    font-size: 30px; letter-spacing: -.015em; line-height: 1;
+  }
+  .brand-type b { color: var(--ivory); font-weight: 600; }
+  .brand-type span { color: var(--rose); }
+  .brand-sub {
+    font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--muted); margin-top: 7px;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-size: 12px; letter-spacing: .15em; text-transform: uppercase; font-weight: 700;
+    color: var(--rose-soft);
+    border: 1px solid rgba(230, 174, 194, .32);
+    background: rgba(201, 120, 155, .12);
+    padding: 7px 15px; border-radius: 30px;
+    margin-bottom: 26px;
+  }
+  .eyebrow i { width: 6px; height: 6px; border-radius: 50%; background: var(--rose); }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: 66px; line-height: 1.03; letter-spacing: -.025em;
+    color: var(--ivory); font-weight: 600;
+    text-wrap: balance;
+  }
+  h1 em { font-style: normal; color: var(--rose-soft); }
+
+  .sub {
+    margin-top: 22px;
+    font-size: 19px; line-height: 1.52; color: var(--muted);
+    max-width: 460px;
+  }
+
+  .pills { display: flex; gap: 8px; margin-top: 30px; flex-wrap: wrap; max-width: 500px; }
+  .pill {
+    font-size: 12.5px; font-weight: 600; color: #E9D8E0;
+    background: rgba(255, 255, 255, .07);
+    border: 1px solid rgba(255, 255, 255, .1);
+    padding: 7px 12px; border-radius: 9px;
+    white-space: nowrap;
+  }
+
+  /* In normal flow, pinned to the bottom — it can never collide with the pills */
+  .url {
+    margin-top: auto; padding-top: 30px;
+    font-size: 15px; font-weight: 600; color: var(--rose-soft);
+    letter-spacing: .01em;
+  }
+
+  /* ── Right: dashboard preview ───────────────────────── */
+  .right { position: relative; height: 100%; }
+
+  .ui {
+    position: absolute;
+    top: 92px; left: 52px; width: 508px;
+    background: #FFFFFF;
+    border-radius: 16px;
+    box-shadow: 0 40px 90px -20px rgba(0, 0, 0, .62), 0 0 0 1px rgba(255, 255, 255, .09);
+    overflow: hidden;
+    color: #2A2126;
+  }
+
+  .ui-top {
+    padding: 15px 17px 13px;
+    border-bottom: 1px solid #EDE4E1;
+  }
+  .ui-title { font-family: var(--font-display); font-size: 18px; font-weight: 600; letter-spacing: -.01em; }
+  .ui-note { font-size: 11px; color: #8A7F85; margin-top: 3px; line-height: 1.4; }
+
+  .ui-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; padding: 15px 17px; }
+  .ui-tile { border: 1px solid #EBE2DF; border-radius: 10px; padding: 10px 11px; }
+  .ui-lab {
+    font-size: 8px; letter-spacing: .1em; text-transform: uppercase;
+    color: #8A7F85; font-weight: 700;
+  }
+  .ui-val {
+    font-family: var(--font-display); font-size: 25px; font-weight: 600;
+    letter-spacing: -.02em; margin-top: 6px; line-height: 1;
+  }
+  .ui-val small { font-size: 14px; color: #8A7F85; font-weight: 400; }
+  .ui-val small.pre { margin-right: 3px; }
+  .ui-delta { font-size: 9.5px; font-weight: 700; color: #4F6B54; margin-top: 5px; }
+
+  .ui-rows { padding: 0 17px 17px; display: flex; flex-direction: column; gap: 8px; }
+  .ui-row {
+    display: flex; align-items: center; gap: 10px;
+    border: 1px solid #EDE4E1; border-radius: 10px; padding: 10px 12px;
+  }
+  .ui-row.hot { border-color: #E3C3CF; background: #FCF5F7; }
+  .ui-av {
+    width: 30px; height: 30px; border-radius: 50%; flex: none;
+    background: #F5E7EB; color: #B8788C;
+    display: grid; place-items: center; font-size: 10.5px; font-weight: 800;
+  }
+  .ui-name { font-weight: 700; font-size: 12px; }
+  .ui-meta { font-size: 10px; color: #8A7F85; margin-top: 1px; }
+  .ui-treat { margin-left: auto; text-align: right; }
+  .ui-treat b { font-size: 11px; font-weight: 700; }
+  .ui-treat span { display: block; font-size: 9.5px; color: #8A7F85; margin-top: 1px; }
+  .ui-pill {
+    flex: none; font-size: 9.5px; font-weight: 700; padding: 3px 9px; border-radius: 20px;
+  }
+  .ui-pill.new { background: #F9E5EA; color: #A83E5C; }
+  .ui-pill.booked { background: #EAE4F0; color: #57406F; }
+
+  /* Fade the preview into the card edge */
+  .right::after {
+    content: "";
+    position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(200deg, transparent 58%, rgba(30, 20, 32, .55) 92%);
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="left">
+    <div class="brand">
+      <svg width="42" height="42" viewBox="0 0 30 30" fill="none" aria-hidden="true">
+        <path d="M4 24V8.5c0-.8 1-1.2 1.5-.5L11 16l5.5-8c.5-.7 1.5-.3 1.5.5V24" stroke="#F7F1EE" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M20.5 24c4-1.2 6.5-4.6 6.5-8.6 0-3.3-2-6-4.8-6.9" stroke="#C9789B" stroke-width="2.2" stroke-linecap="round"/>
+        <circle cx="23.4" cy="6.6" r="1.8" fill="#E6AEC2"/>
+      </svg>
+      <div>
+        <div class="brand-type"><b>Beauty</b><span>MApp</span></div>
+        <div class="brand-sub">Provider Console</div>
+      </div>
+    </div>
+
+    <div class="eyebrow"><i></i>For partner clinics</div>
+
+    <h1>Every lead arrives <em>already qualified</em>.</h1>
+
+    <p class="sub">
+      Skin analysed, treatment identified, budget stated — and the user has
+      already seen their result before they ask for you.
+    </p>
+
+    <div class="pills">
+      <span class="pill">AI skin analysis</span>
+      <span class="pill">Match reasoning</span>
+      <span class="pill">Booking pipeline</span>
+      <span class="pill">Conversion analytics</span>
+    </div>
+
+    <div class="url">beautymapp.vercel.app</div>
+  </div>
+
+  <div class="right">
+    <div class="ui">
+      <div class="ui-top">
+        <div class="ui-title">Consultation requests</div>
+        <div class="ui-note">Users who completed an AI skin analysis and asked to be seen at Elevate Beauty.</div>
+      </div>
+
+      <div class="ui-stats">
+        <div class="ui-tile">
+          <div class="ui-lab">Leads received</div>
+          <div class="ui-val">16</div>
+          <div class="ui-delta">+31% vs. July</div>
+        </div>
+        <div class="ui-tile">
+          <div class="ui-lab">Booking rate</div>
+          <div class="ui-val">44<small>%</small></div>
+          <div class="ui-delta">+6 pts</div>
+        </div>
+        <div class="ui-tile">
+          <div class="ui-lab">Revenue</div>
+          <div class="ui-val"><small class="pre">€</small>4,180</div>
+          <div class="ui-delta">+€1,240</div>
+        </div>
+      </div>
+
+      <div class="ui-rows">
+        <div class="ui-row hot">
+          <div class="ui-av">MJ</div>
+          <div>
+            <div class="ui-name">Milica J.</div>
+            <div class="ui-meta">34 · Hyperpigmentation · 96% match</div>
+          </div>
+          <div class="ui-treat">
+            <b>IPL Photofacial</b>
+            <span>3–4 sessions · €180–€260</span>
+          </div>
+          <span class="ui-pill new">New</span>
+        </div>
+
+        <div class="ui-row">
+          <div class="ui-av">JP</div>
+          <div>
+            <div class="ui-name">Jelena P.</div>
+            <div class="ui-meta">41 · Fine lines · 93% match</div>
+          </div>
+          <div class="ui-treat">
+            <b>Microneedling with RF</b>
+            <span>3 sessions · €220–€300</span>
+          </div>
+          <span class="ui-pill new">New</span>
+        </div>
+
+        <div class="ui-row">
+          <div class="ui-av">DK</div>
+          <div>
+            <div class="ui-name">Dunja K.</div>
+            <div class="ui-meta">24 · Enlarged pores · 92% match</div>
+          </div>
+          <div class="ui-treat">
+            <b>Hydrafacial</b>
+            <span>Monthly · €80–€110</span>
+          </div>
+          <span class="ui-pill booked">Booked</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

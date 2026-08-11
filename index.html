@@ -660,7 +660,7 @@
     .mobile-clinic svg { color: var(--text-faint); }
     .mobile-clinic .clinic-badge { width: 26px; height: 26px; font-size: 11px; border-radius: 7px; }
 
-    .main { padding: 16px 14px 108px; gap: 18px; }
+    .main { padding: 18px 20px 112px; gap: 18px; }
     .topbar { align-items: flex-start; gap: 12px; }
     .topbar h1 { font-size: 21px; }
     .topbar p { font-size: 12.5px; }
@@ -672,7 +672,10 @@
     /* Metrics become one swipeable row so the pipeline stays near the top */
     .stats {
       display: flex; gap: 10px; overflow-x: auto;
-      margin: 0 -14px; padding: 0 14px 2px;
+      /* Negative margin + equal padding: tiles still line up with the page
+         gutter, but the scrollport has room for their border and shadow
+         instead of shearing it off at the edge. */
+      margin: 0 -9px -12px; padding: 0 9px 14px;
       scroll-snap-type: x proximity;
       scrollbar-width: none;
     }
