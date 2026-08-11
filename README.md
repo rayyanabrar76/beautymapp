@@ -1,4 +1,4 @@
-# BeautyMApp - Clinic / Provider Dashboard
+# BeautyMApp for Clinics
 
 An interactive prototype of the **B2B side** of BeautyMApp: the console a partner clinic logs into to receive and work the qualified leads the consumer app sends them.
 
