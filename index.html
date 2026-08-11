@@ -726,6 +726,14 @@
       width: 7px; height: 7px; border-radius: 50%; background: var(--st-new-fg);
     }
     .tab-dot[hidden] { display: none; }
+
+    /* Clear the floating tab bar instead of landing on top of it */
+    .toast {
+      bottom: calc(86px + env(safe-area-inset-bottom, 0px));
+      max-width: 86%;
+      text-align: center;
+      line-height: 1.4;
+    }
   }
 
   /* Table rows become cards on phones */
