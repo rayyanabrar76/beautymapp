@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#4A3348">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjNEEzMzQ4Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjQzk3ODlCIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iOCIgZmlsbD0idXJsKCNnKSIvPjxwYXRoIGQ9Ik04IDIzVjEwLjZjMC0uOSAxLjEtMS4zIDEuNy0uNkwxNiAxN2w2LjMtN2MuNi0uNyAxLjctLjMgMS43LjZWMjMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIyLjciIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPgo=">
-<meta name="description" content="BeautyMApp Clinic / Provider Dashboard prototype — qualified leads, AI skin analysis, treatment recommendations, match reasoning and conversion analytics.">
+<meta name="description" content="BeautyMApp Clinic / Provider Dashboard prototype - qualified leads, AI skin analysis, treatment recommendations, match reasoning and conversion analytics.">
 <title>BeautyMApp - Clinic Dashboard</title>
 <style>
   /* ── Tokens: complete light palette on bare :root ───────────────── */
@@ -845,7 +845,7 @@
     </nav>
 
     <div class="rail-foot">
-      <p><b>Prototype</b> — illustrative data, not live patient records.</p>
+      <p><b>Prototype</b> - illustrative data, not live patient records.</p>
       <p>BeautyMApp for Providers · v0.1</p>
     </div>
   </aside>
@@ -1050,7 +1050,7 @@
     <div class="view" data-view="catalogue" hidden>
       <p class="disclaimer">
         This list is what BeautyMApp matches against. If a treatment is paused, users looking for
-        it are routed to another clinic instead — so this page directly controls the leads you receive.
+        it are routed to another clinic instead - so this page directly controls the leads you receive.
       </p>
       <section class="panel">
         <div class="panel-head">
@@ -1085,7 +1085,7 @@
     <!-- ── Availability ──────────────────────────────────────────── -->
     <div class="view" data-view="availability" hidden>
       <p class="disclaimer">
-        Users tell BeautyMApp when they are free. We only show them clinics whose open slots overlap —
+        Users tell BeautyMApp when they are free. We only show them clinics whose open slots overlap -
         so widening your availability widens the pool of leads you can be matched to.
       </p>
       <section class="panel">
@@ -1117,7 +1117,7 @@
             <div class="reach-bar"><div class="reach-fill" id="reach-fill"></div></div>
             <div class="reach-num" id="reach-num">0%</div>
           </div>
-          <p class="hint" id="reach-hint" style="margin-top:10px">—</p>
+          <p class="hint" id="reach-hint" style="margin-top:10px">-</p>
         </div>
       </section>
     </div>
@@ -1188,7 +1188,7 @@
             <div class="rule-control">
               <select id="band">
                 <option>Budget · under €150</option>
-                <option selected>Mid · €150–€600</option>
+                <option selected>Mid · €150-€600</option>
                 <option>Premium · €600+</option>
               </select>
             </div>
@@ -1272,7 +1272,7 @@
 
       <div class="save-row">
         <button class="btn btn-primary" id="save-settings">Save changes</button>
-        <span class="hint">Prototype — changes are not stored.</span>
+        <span class="hint">Prototype - changes are not stored.</span>
       </div>
     </div>
   </main>
@@ -1335,10 +1335,10 @@
 
 <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="d-name" aria-hidden="true">
   <div class="drawer-head">
-    <div class="avatar" id="d-avatar">—</div>
+    <div class="avatar" id="d-avatar">-</div>
     <div class="drawer-title">
-      <h3 id="d-name">—</h3>
-      <p id="d-meta">—</p>
+      <h3 id="d-name">-</h3>
+      <p id="d-meta">-</p>
     </div>
     <button class="icon-btn" id="d-close" aria-label="Close panel">
       <svg width="17" height="17" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
@@ -1363,14 +1363,14 @@
           <div class="sim-pane before"><span>BEFORE</span></div>
           <div class="sim-pane after"><span>AFTER</span></div>
         </div>
-        <div class="sim-note" id="d-simnote">—</div>
+        <div class="sim-note" id="d-simnote">-</div>
       </div>
     </div>
 
     <div>
       <h4 class="sec-title">Recommended treatments</h4>
       <div id="d-recs"></div>
-      <p class="propose" id="d-propose">—</p>
+      <p class="propose" id="d-propose">-</p>
     </div>
 
     <div>
@@ -1408,114 +1408,114 @@
   var LEADS = [
     { id:"BM-2481", first:"Milica J.", initials:"MJ", age:34, city:"Belgrade", waited:2, status:"new", score:96,
       concerns:[["Hyperpigmentation",3],["Uneven texture",2],["Dullness",2]],
-      recs:[["IPL Photofacial",96,"3–4 sessions","€180–€260"],["Chemical peel (mandelic)",88,"4 sessions","€90–€140"],["Vitamin C protocol",74,"Home care","€45/mo"]],
-      match:[["Offers <b>IPL Photofacial</b>","the top recommendation"],["<b>2.4 km</b> away","within her 10 km radius"],["Price band <b>€150–€300</b>","matches her stated budget"],["<b>Weekday evening</b> slots","matches her availability"]],
-      prefs:[["Budget","€200–€400"],["Availability","Weekday evenings"],["Travel","Up to 10 km"],["Previous treatments","None"]],
+      recs:[["IPL Photofacial",96,"3-4 sessions","€180-€260"],["Chemical peel (mandelic)",88,"4 sessions","€90-€140"],["Vitamin C protocol",74,"Home care","€45/mo"]],
+      match:[["Offers <b>IPL Photofacial</b>","the top recommendation"],["<b>2.4 km</b> away","within her 10 km radius"],["Price band <b>€150-€300</b>","matches her stated budget"],["<b>Weekday evening</b> slots","matches her availability"]],
+      prefs:[["Budget","€200-€400"],["Availability","Weekday evenings"],["Travel","Up to 10 km"],["Previous treatments","None"]],
       sim:"Viewed 11 Aug · Hyperpigmentation improvement, 12-week horizon" },
 
     { id:"BM-2479", first:"Jelena P.", initials:"JP", age:41, city:"Novi Sad", waited:6, status:"new", score:93,
       concerns:[["Fine lines",3],["Volume loss",2],["Dryness",1]],
-      recs:[["Microneedling with RF",93,"3 sessions","€220–€300"],["Dermal filler (mid-face)",85,"1 session","€350–€450"],["Hydrafacial",70,"Monthly","€80"]],
+      recs:[["Microneedling with RF",93,"3 sessions","€220-€300"],["Dermal filler (mid-face)",85,"1 session","€350-€450"],["Hydrafacial",70,"Monthly","€80"]],
       match:[["Offers <b>Microneedling with RF</b>","the top recommendation"],["<b>1.1 km</b> away","closest matching provider"],["Rated <b>4.8</b> by 126 users","above her 4.5 filter"],["Accepts <b>new patients</b>","confirmed 9 Aug"]],
-      prefs:[["Budget","€300–€600"],["Availability","Saturday mornings"],["Travel","Up to 15 km"],["Previous treatments","Botox, 2024"]],
+      prefs:[["Budget","€300-€600"],["Availability","Saturday mornings"],["Travel","Up to 15 km"],["Previous treatments","Botox, 2024"]],
       sim:"Viewed 11 Aug · Fine line softening, 8-week horizon" },
 
     { id:"BM-2476", first:"Ana S.", initials:"AS", age:28, city:"Belgrade", waited:9, status:"new", score:91,
       concerns:[["Acne scarring",3],["Enlarged pores",3],["Oiliness",2]],
-      recs:[["Fractional laser resurfacing",91,"3 sessions","€400–€520"],["Microneedling",86,"4 sessions","€150–€200"],["Salicylic peel",72,"6 sessions","€70–€110"]],
+      recs:[["Fractional laser resurfacing",91,"3 sessions","€400-€520"],["Microneedling",86,"4 sessions","€150-€200"],["Salicylic peel",72,"6 sessions","€70-€110"]],
       match:[["Offers <b>fractional laser</b>","the top recommendation"],["<b>3.8 km</b> away","within her radius"],["Has <b>acne-scarring</b> case history","18 documented cases"],["Offers <b>payment plans</b>","she flagged budget sensitivity"]],
-      prefs:[["Budget","€150–€300"],["Availability","Flexible"],["Travel","Up to 12 km"],["Previous treatments","Topical retinoid"]],
+      prefs:[["Budget","€150-€300"],["Availability","Flexible"],["Travel","Up to 12 km"],["Previous treatments","Topical retinoid"]],
       sim:"Viewed 10 Aug · Acne scar texture, 16-week horizon" },
 
     { id:"BM-2475", first:"Tijana M.", initials:"TM", age:37, city:"Belgrade", waited:11, status:"new", score:89,
       concerns:[["Melasma",3],["Sun damage",2]],
-      recs:[["Cosmelan depigmentation",89,"1 course","€480–€620"],["Tranexamic mesotherapy",82,"4 sessions","€200–€280"],["SPF 50 protocol",78,"Home care","€35/mo"]],
+      recs:[["Cosmelan depigmentation",89,"1 course","€480-€620"],["Tranexamic mesotherapy",82,"4 sessions","€200-€280"],["SPF 50 protocol",78,"Home care","€35/mo"]],
       match:[["Offers <b>Cosmelan</b>","the top recommendation"],["<b>4.6 km</b> away","within her radius"],["Clinician with <b>pigmentation</b> focus","Dr. Petrović"],["Consultation <b>free</b>","she filtered for this"]],
-      prefs:[["Budget","€400–€700"],["Availability","Weekday mornings"],["Travel","Up to 20 km"],["Previous treatments","Hydroquinone, 2023"]],
+      prefs:[["Budget","€400-€700"],["Availability","Weekday mornings"],["Travel","Up to 20 km"],["Previous treatments","Hydroquinone, 2023"]],
       sim:"Viewed 10 Aug · Melasma evenness, 12-week horizon" },
 
     { id:"BM-2472", first:"Nevena R.", initials:"NR", age:45, city:"Niš", waited:14, status:"new", score:84,
       concerns:[["Skin laxity",3],["Fine lines",2],["Dullness",1]],
-      recs:[["HIFU lifting",84,"1–2 sessions","€500–€700"],["Radiofrequency lifting",79,"6 sessions","€300–€400"],["Mesotherapy",68,"4 sessions","€180"]],
+      recs:[["HIFU lifting",84,"1-2 sessions","€500-€700"],["Radiofrequency lifting",79,"6 sessions","€300-€400"],["Mesotherapy",68,"4 sessions","€180"]],
       match:[["Offers <b>HIFU lifting</b>","the top recommendation"],["<b>Video consultation</b> available","she is 190 km away"],["Rated <b>4.8</b> by 126 users","above her 4.5 filter"],["Weekend <b>availability</b>","matches her travel plan"]],
-      prefs:[["Budget","€400–€800"],["Availability","Weekends only"],["Travel","Willing to travel"],["Previous treatments","None"]],
+      prefs:[["Budget","€400-€800"],["Availability","Weekends only"],["Travel","Willing to travel"],["Previous treatments","None"]],
       sim:"Viewed 9 Aug · Jawline definition, 12-week horizon" },
 
     { id:"BM-2468", first:"Sofija D.", initials:"SD", age:26, city:"Belgrade", waited:26, status:"contacted", score:90,
       concerns:[["Active acne",3],["Redness",2]],
-      recs:[["LED blue light therapy",90,"8 sessions","€160–€220"],["Salicylic peel",84,"6 sessions","€70–€110"],["Barrier repair routine",76,"Home care","€50/mo"]],
+      recs:[["LED blue light therapy",90,"8 sessions","€160-€220"],["Salicylic peel",84,"6 sessions","€70-€110"],["Barrier repair routine",76,"Home care","€50/mo"]],
       match:[["Offers <b>LED therapy</b>","the top recommendation"],["<b>1.9 km</b> away","closest matching provider"],["Accepts <b>under-30</b> pricing","student rate available"],["Same-week <b>availability</b>","she asked for urgent"]],
-      prefs:[["Budget","€100–€250"],["Availability","Weekday afternoons"],["Travel","Up to 8 km"],["Previous treatments","Benzoyl peroxide"]],
+      prefs:[["Budget","€100-€250"],["Availability","Weekday afternoons"],["Travel","Up to 8 km"],["Previous treatments","Benzoyl peroxide"]],
       sim:"Viewed 8 Aug · Active acne clearance, 10-week horizon" },
 
     { id:"BM-2464", first:"Katarina V.", initials:"KV", age:52, city:"Novi Sad", waited:32, status:"contacted", score:88,
       concerns:[["Volume loss",3],["Deep lines",3],["Skin laxity",2]],
-      recs:[["Dermal filler (full face)",88,"1–2 sessions","€600–€900"],["Thread lift",81,"1 session","€700–€950"],["Skin booster",73,"3 sessions","€300"]],
+      recs:[["Dermal filler (full face)",88,"1-2 sessions","€600-€900"],["Thread lift",81,"1 session","€700-€950"],["Skin booster",73,"3 sessions","€300"]],
       match:[["Offers <b>dermal filler</b>","the top recommendation"],["<b>Premium</b> price band","matches her budget"],["Clinician with <b>15 yrs</b> experience","she filtered for seniority"],["Private <b>consultation room</b>","she requested discretion"]],
-      prefs:[["Budget","€600–€1,200"],["Availability","Weekday mornings"],["Travel","Up to 25 km"],["Previous treatments","Filler, 2023"]],
+      prefs:[["Budget","€600-€1,200"],["Availability","Weekday mornings"],["Travel","Up to 25 km"],["Previous treatments","Filler, 2023"]],
       sim:"Viewed 7 Aug · Mid-face volume, 4-week horizon" },
 
     { id:"BM-2461", first:"Isidora L.", initials:"IL", age:31, city:"Belgrade", waited:38, status:"contacted", score:87,
       concerns:[["Under-eye hollows",3],["Dark circles",2],["Dullness",1]],
-      recs:[["Tear-trough filler",87,"1 session","€320–€420"],["PRP under-eye",80,"3 sessions","€280–€360"],["Caffeine eye protocol",65,"Home care","€30/mo"]],
+      recs:[["Tear-trough filler",87,"1 session","€320-€420"],["PRP under-eye",80,"3 sessions","€280-€360"],["Caffeine eye protocol",65,"Home care","€30/mo"]],
       match:[["Offers <b>tear-trough filler</b>","the top recommendation"],["<b>2.4 km</b> away","within her radius"],["<b>32 under-eye</b> cases documented","above platform median"],["Evening <b>slots</b>","matches her availability"]],
-      prefs:[["Budget","€250–€500"],["Availability","Weekday evenings"],["Travel","Up to 10 km"],["Previous treatments","None"]],
+      prefs:[["Budget","€250-€500"],["Availability","Weekday evenings"],["Travel","Up to 10 km"],["Previous treatments","None"]],
       sim:"Viewed 6 Aug · Under-eye brightening, 6-week horizon" },
 
     { id:"BM-2457", first:"Marija T.", initials:"MT", age:39, city:"Kragujevac", waited:45, status:"contacted", score:82,
       concerns:[["Rosacea",3],["Redness",3],["Sensitivity",2]],
-      recs:[["Vascular laser",82,"3 sessions","€260–€340"],["LED red light",75,"6 sessions","€140"],["Azelaic acid protocol",71,"Home care","€40/mo"]],
+      recs:[["Vascular laser",82,"3 sessions","€260-€340"],["LED red light",75,"6 sessions","€140"],["Azelaic acid protocol",71,"Home care","€40/mo"]],
       match:[["Offers <b>vascular laser</b>","the top recommendation"],["<b>Video consultation</b> available","she is 140 km away"],["<b>Sensitive-skin</b> protocol listed","she filtered for this"],["Free <b>patch test</b>","she requested one"]],
-      prefs:[["Budget","€200–€400"],["Availability","Saturday mornings"],["Travel","Willing to travel"],["Previous treatments","Metronidazole gel"]],
+      prefs:[["Budget","€200-€400"],["Availability","Saturday mornings"],["Travel","Willing to travel"],["Previous treatments","Metronidazole gel"]],
       sim:"Viewed 5 Aug · Redness reduction, 12-week horizon" },
 
     { id:"BM-2452", first:"Dunja K.", initials:"DK", age:24, city:"Belgrade", waited:58, status:"booked", score:92,
       concerns:[["Enlarged pores",3],["Oiliness",3],["Uneven texture",2]],
-      recs:[["Hydrafacial",92,"Monthly","€80–€110"],["Microneedling",84,"3 sessions","€150–€200"],["Niacinamide protocol",70,"Home care","€35/mo"]],
+      recs:[["Hydrafacial",92,"Monthly","€80-€110"],["Microneedling",84,"3 sessions","€150-€200"],["Niacinamide protocol",70,"Home care","€35/mo"]],
       match:[["Offers <b>Hydrafacial</b>","the top recommendation"],["<b>1.9 km</b> away","closest matching provider"],["Student <b>rate</b> available","she flagged budget"],["Same-week <b>availability</b>","matched instantly"]],
-      prefs:[["Budget","€80–€200"],["Availability","Flexible"],["Travel","Up to 8 km"],["Previous treatments","None"]],
+      prefs:[["Budget","€80-€200"],["Availability","Flexible"],["Travel","Up to 8 km"],["Previous treatments","None"]],
       sim:"Viewed 3 Aug · Pore refinement, 8-week horizon" },
 
     { id:"BM-2448", first:"Anđela B.", initials:"AB", age:33, city:"Belgrade", waited:66, status:"booked", score:90,
       concerns:[["Fine lines",2],["Forehead lines",3]],
-      recs:[["Botulinum toxin (upper face)",90,"1 session","€180–€260"],["Skin booster",76,"3 sessions","€300"],["Retinoid protocol",68,"Home care","€40/mo"]],
+      recs:[["Botulinum toxin (upper face)",90,"1 session","€180-€260"],["Skin booster",76,"3 sessions","€300"],["Retinoid protocol",68,"Home care","€40/mo"]],
       match:[["Offers <b>botulinum toxin</b>","the top recommendation"],["<b>3.1 km</b> away","within her radius"],["Rated <b>4.8</b> by 126 users","above her 4.5 filter"],["Returning <b>BeautyMApp</b> user","second booking with you"]],
-      prefs:[["Budget","€150–€350"],["Availability","Weekday evenings"],["Travel","Up to 12 km"],["Previous treatments","Botox via BeautyMApp, Mar 2026"]],
+      prefs:[["Budget","€150-€350"],["Availability","Weekday evenings"],["Travel","Up to 12 km"],["Previous treatments","Botox via BeautyMApp, Mar 2026"]],
       sim:"Viewed 1 Aug · Forehead smoothing, 3-week horizon" },
 
     { id:"BM-2444", first:"Teodora N.", initials:"TN", age:47, city:"Novi Sad", waited:74, status:"booked", score:86,
       concerns:[["Sun damage",3],["Hyperpigmentation",2],["Skin laxity",2]],
-      recs:[["IPL Photofacial",86,"4 sessions","€180–€260"],["Fractional laser",80,"2 sessions","€400–€520"],["SPF 50 protocol",77,"Home care","€35/mo"]],
+      recs:[["IPL Photofacial",86,"4 sessions","€180-€260"],["Fractional laser",80,"2 sessions","€400-€520"],["SPF 50 protocol",77,"Home care","€35/mo"]],
       match:[["Offers <b>IPL Photofacial</b>","the top recommendation"],["<b>5.2 km</b> away","within her radius"],["Clinician with <b>pigmentation</b> focus","Dr. Petrović"],["Weekday <b>morning</b> slots","matches her availability"]],
-      prefs:[["Budget","€300–€600"],["Availability","Weekday mornings"],["Travel","Up to 20 km"],["Previous treatments","Chemical peel, 2022"]],
+      prefs:[["Budget","€300-€600"],["Availability","Weekday mornings"],["Travel","Up to 20 km"],["Previous treatments","Chemical peel, 2022"]],
       sim:"Viewed 29 Jul · Sun damage evenness, 16-week horizon" },
 
     { id:"BM-2437", first:"Jovana Ć.", initials:"JĆ", age:29, city:"Belgrade", waited:96, status:"completed", score:94,
       concerns:[["Dullness",3],["Dehydration",2]],
-      recs:[["Hydrafacial",94,"Monthly","€80–€110"],["Mesotherapy",81,"4 sessions","€180"],["Hyaluronic protocol",72,"Home care","€38/mo"]],
+      recs:[["Hydrafacial",94,"Monthly","€80-€110"],["Mesotherapy",81,"4 sessions","€180"],["Hyaluronic protocol",72,"Home care","€38/mo"]],
       match:[["Offers <b>Hydrafacial</b>","the top recommendation"],["<b>2.4 km</b> away","within her radius"],["Same-week <b>availability</b>","matched instantly"],["Free <b>consultation</b>","she filtered for this"]],
-      prefs:[["Budget","€80–€200"],["Availability","Weekday evenings"],["Travel","Up to 10 km"],["Previous treatments","None"]],
+      prefs:[["Budget","€80-€200"],["Availability","Weekday evenings"],["Travel","Up to 10 km"],["Previous treatments","None"]],
       sim:"Viewed 24 Jul · Radiance and hydration, 6-week horizon" },
 
     { id:"BM-2431", first:"Sara M.", initials:"SM", age:36, city:"Belgrade", waited:112, status:"completed", score:89,
       concerns:[["Acne scarring",2],["Uneven texture",3]],
-      recs:[["Microneedling",89,"4 sessions","€150–€200"],["TCA peel",83,"3 sessions","€120–€180"],["Retinoid protocol",70,"Home care","€40/mo"]],
+      recs:[["Microneedling",89,"4 sessions","€150-€200"],["TCA peel",83,"3 sessions","€120-€180"],["Retinoid protocol",70,"Home care","€40/mo"]],
       match:[["Offers <b>microneedling</b>","the top recommendation"],["<b>3.8 km</b> away","within her radius"],["<b>18 acne-scarring</b> cases","above platform median"],["Payment <b>plans</b> offered","she flagged budget"]],
-      prefs:[["Budget","€150–€300"],["Availability","Saturday mornings"],["Travel","Up to 12 km"],["Previous treatments","None"]],
+      prefs:[["Budget","€150-€300"],["Availability","Saturday mornings"],["Travel","Up to 12 km"],["Previous treatments","None"]],
       sim:"Viewed 20 Jul · Texture refinement, 16-week horizon" },
 
     { id:"BM-2427", first:"Lena V.", initials:"LV", age:43, city:"Subotica", waited:128, status:"completed", score:85,
       concerns:[["Fine lines",3],["Dryness",2],["Dullness",2]],
-      recs:[["Skin booster",85,"3 sessions","€300–€380"],["Mesotherapy",79,"4 sessions","€180"],["Hydrafacial",71,"Monthly","€80"]],
+      recs:[["Skin booster",85,"3 sessions","€300-€380"],["Mesotherapy",79,"4 sessions","€180"],["Hydrafacial",71,"Monthly","€80"]],
       match:[["Offers <b>skin boosters</b>","the top recommendation"],["<b>Video consultation</b> available","she is 175 km away"],["Weekend <b>availability</b>","matched her travel plan"],["Rated <b>4.8</b> by 126 users","above her filter"]],
-      prefs:[["Budget","€250–€500"],["Availability","Weekends only"],["Travel","Willing to travel"],["Previous treatments","None"]],
+      prefs:[["Budget","€250-€500"],["Availability","Weekends only"],["Travel","Willing to travel"],["Previous treatments","None"]],
       sim:"Viewed 16 Jul · Hydration and glow, 8-week horizon" },
 
     { id:"BM-2422", first:"Mina A.", initials:"MA", age:30, city:"Belgrade", waited:141, status:"completed", score:91,
       concerns:[["Hyperpigmentation",2],["Dullness",3]],
-      recs:[["Chemical peel (mandelic)",91,"4 sessions","€90–€140"],["IPL Photofacial",84,"3 sessions","€180–€260"],["Vitamin C protocol",73,"Home care","€45/mo"]],
+      recs:[["Chemical peel (mandelic)",91,"4 sessions","€90-€140"],["IPL Photofacial",84,"3 sessions","€180-€260"],["Vitamin C protocol",73,"Home care","€45/mo"]],
       match:[["Offers <b>chemical peels</b>","the top recommendation"],["<b>2.4 km</b> away","within her radius"],["Free <b>consultation</b>","she filtered for this"],["Evening <b>slots</b>","matches her availability"]],
-      prefs:[["Budget","€100–€250"],["Availability","Weekday evenings"],["Travel","Up to 10 km"],["Previous treatments","None"]],
+      prefs:[["Budget","€100-€250"],["Availability","Weekday evenings"],["Travel","Up to 10 km"],["Previous treatments","None"]],
       sim:"Viewed 12 Jul · Tone evenness, 10-week horizon" }
   ];
 
@@ -1686,7 +1686,7 @@
     $("d-match").innerHTML = l.match.map(function (m) {
       return "<li><svg width='13' height='13' viewBox='0 0 16 16' fill='none' aria-hidden='true'>" +
         "<path d='m3.5 8.5 3 3 6-7' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>" +
-        "<span>" + m[0] + " — " + esc(m[1]) + "</span></li>";
+        "<span>" + m[0] + " - " + esc(m[1]) + "</span></li>";
     }).join("");
 
     $("d-prefs").innerHTML = l.prefs.map(function (p) {
@@ -1777,17 +1777,17 @@
     if (!selected) { return; }
     var l = LEADS.filter(function (x) { return x.id === selected; })[0];
     setStatus(selected, "contacted");
-    toast("Contact details released — proposing " + l.recs[chosenRec][0]);
+    toast("Contact details released - proposing " + l.recs[chosenRec][0]);
   });
 
   $("d-decline").addEventListener("click", function () {
     if (!selected) { return; }
-    toast("Returned to matching — we'll route this user to another clinic");
+    toast("Returned to matching - we'll route this user to another clinic");
     closeDrawer();
   });
 
   $("export").addEventListener("click", function () {
-    toast("Prototype — export is not wired up yet");
+    toast("Prototype - export is not wired up yet");
   });
 
   $("d-close").addEventListener("click", closeDrawer);
@@ -1877,25 +1877,25 @@
 
   /* ── Treatment catalogue ──────────────────────────────────────── */
   var TREATMENTS = [
-    ["IPL Photofacial", "Light-based", "€180–€260", "3–4 sessions", 5, true],
-    ["Microneedling", "Skin needling", "€150–€200", "3–4 sessions", 5, true],
-    ["Microneedling with RF", "Skin needling", "€220–€300", "3 sessions", 2, true],
-    ["Hydrafacial", "Facial", "€80–€110", "Monthly", 6, true],
-    ["Chemical peel (mandelic)", "Peels", "€90–€140", "4 sessions", 3, true],
-    ["Salicylic peel", "Peels", "€70–€110", "6 sessions", 2, true],
-    ["TCA peel", "Peels", "€120–€180", "3 sessions", 1, true],
-    ["Cosmelan depigmentation", "Peels", "€480–€620", "1 course", 1, true],
-    ["Fractional laser resurfacing", "Laser", "€400–€520", "2–3 sessions", 3, true],
-    ["Vascular laser", "Laser", "€260–€340", "3 sessions", 1, true],
-    ["Dermal filler", "Injectable", "€320–€900", "1–2 sessions", 4, true],
-    ["Botulinum toxin", "Injectable", "€180–€260", "1 session", 2, true],
-    ["Skin booster", "Injectable", "€300–€380", "3 sessions", 2, true],
-    ["Mesotherapy", "Injectable", "€180–€280", "4 sessions", 3, true],
-    ["PRP under-eye", "Injectable", "€280–€360", "3 sessions", 1, true],
-    ["LED therapy", "Light-based", "€140–€220", "6–8 sessions", 2, true],
-    ["HIFU lifting", "Energy-based", "€500–€700", "1–2 sessions", 1, true],
-    ["Radiofrequency lifting", "Energy-based", "€300–€400", "6 sessions", 1, true],
-    ["Thread lift", "Surgical-adjacent", "€700–€950", "1 session", 1, false]
+    ["IPL Photofacial", "Light-based", "€180-€260", "3-4 sessions", 5, true],
+    ["Microneedling", "Skin needling", "€150-€200", "3-4 sessions", 5, true],
+    ["Microneedling with RF", "Skin needling", "€220-€300", "3 sessions", 2, true],
+    ["Hydrafacial", "Facial", "€80-€110", "Monthly", 6, true],
+    ["Chemical peel (mandelic)", "Peels", "€90-€140", "4 sessions", 3, true],
+    ["Salicylic peel", "Peels", "€70-€110", "6 sessions", 2, true],
+    ["TCA peel", "Peels", "€120-€180", "3 sessions", 1, true],
+    ["Cosmelan depigmentation", "Peels", "€480-€620", "1 course", 1, true],
+    ["Fractional laser resurfacing", "Laser", "€400-€520", "2-3 sessions", 3, true],
+    ["Vascular laser", "Laser", "€260-€340", "3 sessions", 1, true],
+    ["Dermal filler", "Injectable", "€320-€900", "1-2 sessions", 4, true],
+    ["Botulinum toxin", "Injectable", "€180-€260", "1 session", 2, true],
+    ["Skin booster", "Injectable", "€300-€380", "3 sessions", 2, true],
+    ["Mesotherapy", "Injectable", "€180-€280", "4 sessions", 3, true],
+    ["PRP under-eye", "Injectable", "€280-€360", "3 sessions", 1, true],
+    ["LED therapy", "Light-based", "€140-€220", "6-8 sessions", 2, true],
+    ["HIFU lifting", "Energy-based", "€500-€700", "1-2 sessions", 1, true],
+    ["Radiofrequency lifting", "Energy-based", "€300-€400", "6 sessions", 1, true],
+    ["Thread lift", "Surgical-adjacent", "€700-€950", "1 session", 1, false]
   ];
 
   function renderCatalogue() {
@@ -1911,7 +1911,7 @@
         '<td data-label="Category"><span class="tag">' + esc(t[1]) + "</span></td>" +
         "<td data-label=\"Price\"><span class='treat-meta'>" + esc(t[2]) + "</span></td>" +
         "<td data-label=\"Course\"><span class='treat-meta'>" + esc(t[3]) + "</span></td>" +
-        '<td data-label="Leads"><span class="score-num">' + (t[5] ? t[4] : "—") + "</span></td>" +
+        '<td data-label="Leads"><span class="score-num">' + (t[5] ? t[4] : "-") + "</span></td>" +
         '<td data-label="Accepting"><button class="switch" type="button" role="switch" aria-checked="' + t[5] +
           '" data-cat-toggle="' + i + '" aria-label="Accepting ' + esc(t[0]) + '"><span></span></button></td></tr>';
     }).join("");
@@ -1923,11 +1923,11 @@
     var i = Number(b.dataset.catToggle);
     TREATMENTS[i][5] = !TREATMENTS[i][5];
     renderCatalogue();
-    toast(TREATMENTS[i][0] + (TREATMENTS[i][5] ? " — now accepting leads" : " — paused, leads will go elsewhere"));
+    toast(TREATMENTS[i][0] + (TREATMENTS[i][5] ? " - now accepting leads" : " - paused, leads will go elsewhere"));
   });
 
   $("add-treatment").addEventListener("click", function () {
-    toast("Prototype — adding treatments is not wired up yet");
+    toast("Prototype - adding treatments is not wired up yet");
   });
 
   /* ── Availability ─────────────────────────────────────────────── */
@@ -1970,7 +1970,7 @@
     $("reach-num").textContent = reach + "%";
     $("reach-hint").textContent = best
       ? "Opening " + best.t.toLowerCase() + " would reach a further " + best.w + "% of users in your area."
-      : "You are open in every block — the widest possible match pool.";
+      : "You are open in every block - the widest possible match pool.";
   }
 
   $("week").addEventListener("click", function (e) {
@@ -1995,7 +1995,7 @@
     $("cap-out").textContent = e.target.value + " leads";
   });
   $("save-settings").addEventListener("click", function () {
-    toast("Prototype — settings are not stored");
+    toast("Prototype - settings are not stored");
   });
 
   /* ── Clinic menu ──────────────────────────────────────────────── */
@@ -2039,9 +2039,9 @@
     if (!b) { return; }
     closeClinicMenu();
     if (b.dataset.act === "profile") { setView("settings"); return; }
-    if (b.dataset.act === "team") { toast("Prototype — team and access is not built yet"); return; }
-    if (b.dataset.act === "billing") { toast("Prototype — billing is not built yet"); return; }
-    toast("Signed out — reload to return to the prototype");
+    if (b.dataset.act === "team") { toast("Prototype - team and access is not built yet"); return; }
+    if (b.dataset.act === "billing") { toast("Prototype - billing is not built yet"); return; }
+    toast("Signed out - reload to return to the prototype");
   });
 
   document.addEventListener("click", function (e) {
