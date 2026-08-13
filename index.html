@@ -912,13 +912,8 @@
     .search { flex: 1; }
     .search input { width: 100%; }
 
-    /* Screens that have a search row (Leads, Treatment catalogue) keep the
-       buttons down there beside it, as they were. Only screens without a
-       search row lift them up onto the title line. */
-    .topbar:has(.topbar-actions:not([hidden])) .topbar-heading { flex: 1 1 100%; }
-    .topbar:has(.topbar-actions:not([hidden])) .topbar-actions { order: 2; width: auto; flex: 1 1 auto; }
-    .topbar:has(.topbar-actions:not([hidden])) #info-btn,
-    .topbar:has(.topbar-actions:not([hidden])) #theme-toggle { order: 3; }
+    /* Search and Export get the full second row to themselves */
+    .topbar-actions .search { flex: 1; }
 
     /* Metrics become one swipeable row so the pipeline stays near the top */
     .stats {
