@@ -651,6 +651,16 @@
     border-radius: 0 8px 8px 0; padding: 10px 12px;
   }
 
+  /* These notes explain a screen once. Kept behind the info button in the
+     title row so they do not eat the top of every phone screen. */
+  .view-note { display: none; }
+  .view-note.open {
+    display: block;
+    animation: menu-in .18s cubic-bezier(.2, .75, .3, 1);
+    transform-origin: top right;
+  }
+  .info-btn-on { border-color: var(--accent); color: var(--accent); }
+
   @media (prefers-reduced-motion: reduce) {
     * { transition: none !important; animation: none !important; }
     /* Without this the splash would never animate away and would sit
@@ -721,6 +731,8 @@
     display: grid; place-items: center; flex: none;
   }
   .theme-btn:hover { background: var(--surface-2); }
+  /* display: grid above would otherwise beat the hidden attribute */
+  .theme-btn[hidden] { display: none; }
 
   .seg { display: inline-flex; background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 2px; gap: 2px; }
   .seg button {
@@ -886,13 +898,27 @@
     .mobile-clinic .clinic-badge { width: 26px; height: 26px; font-size: 11px; border-radius: 7px; }
 
     .main { padding: 18px 20px 112px; gap: 18px; }
-    .topbar { align-items: flex-start; gap: 12px; }
+    /* display: contents lifts the buttons out of .topbar-right so they can sit
+       on the title row while the search bar drops to a row of its own. */
+    .topbar { align-items: center; gap: 12px 8px; flex-wrap: wrap; }
     .topbar h1 { font-size: 21px; }
     .topbar p { font-size: 12.5px; }
-    .topbar-right { width: 100%; }
-    .topbar-actions { flex: 1; min-width: 0; }
+    /* basis 0 so the heading shrinks and the buttons stay on its row, rather
+       than the long subtitle claiming the full width and pushing them down */
+    .topbar-heading { flex: 1 1 0; min-width: 0; order: 1; }
+    .topbar-right { display: contents; }
+    #info-btn, #theme-toggle { order: 2; }
+    .topbar-actions { order: 3; width: 100%; flex: none; }
     .search { flex: 1; }
     .search input { width: 100%; }
+
+    /* Screens that have a search row (Leads, Treatment catalogue) keep the
+       buttons down there beside it, as they were. Only screens without a
+       search row lift them up onto the title line. */
+    .topbar:has(.topbar-actions:not([hidden])) .topbar-heading { flex: 1 1 100%; }
+    .topbar:has(.topbar-actions:not([hidden])) .topbar-actions { order: 2; width: auto; flex: 1 1 auto; }
+    .topbar:has(.topbar-actions:not([hidden])) #info-btn,
+    .topbar:has(.topbar-actions:not([hidden])) #theme-toggle { order: 3; }
 
     /* Metrics become one swipeable row so the pipeline stays near the top */
     .stats {
@@ -1125,6 +1151,9 @@
           Export
         </button>
       </div>
+      <button class="icon-btn theme-btn" id="info-btn" type="button" hidden aria-expanded="false" aria-label="About this screen" title="About this screen">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.2" stroke="currentColor" stroke-width="1.5"/><path d="M8 7.2v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".95" fill="currentColor"/></svg>
+      </button>
       <button class="icon-btn theme-btn" id="theme-toggle" type="button" aria-label="Switch to light theme" title="Switch theme"></button>
       </div>
     </div>
@@ -1240,7 +1269,7 @@
     </div>
 
     <div class="view" data-view="performance" hidden>
-    <p class="disclaimer">
+    <p class="disclaimer view-note">
       These figures come from your clinic, not from us. BeautyMApp does not see your calendar,
       your messages or your payments. A lead counts as booked or completed only when someone at
       your clinic marks it so, and the treatment value is the one you confirm at completion.
@@ -1327,7 +1356,7 @@
 
     <!-- ── Treatment catalogue ───────────────────────────────────── -->
     <div class="view" data-view="catalogue" hidden>
-      <p class="disclaimer">
+      <p class="disclaimer view-note">
         This list is what BeautyMApp matches against. If a treatment is paused, users looking for
         it are routed to another clinic instead - so this page directly controls the leads you receive.
       </p>
@@ -1363,7 +1392,7 @@
 
     <!-- ── Availability ──────────────────────────────────────────── -->
     <div class="view" data-view="availability" hidden>
-      <p class="disclaimer">
+      <p class="disclaimer view-note">
         Users tell BeautyMApp when they are free. We only show them clinics whose open slots overlap -
         so widening your availability widens the pool of leads you can be matched to.
       </p>
@@ -2103,6 +2132,37 @@
   };
 
   var skelTimer = null;
+  var currentView = "leads";
+
+  function closeNote() {
+    Array.prototype.forEach.call(document.querySelectorAll(".view-note.open"), function (n) {
+      n.classList.remove("open");
+    });
+    $("info-btn").setAttribute("aria-expanded", "false");
+    $("info-btn").classList.remove("info-btn-on");
+  }
+
+  function currentNote() {
+    return document.querySelector('.view[data-view="' + currentView + '"] .view-note');
+  }
+
+  $("info-btn").addEventListener("click", function (e) {
+    e.stopPropagation();
+    var note = currentNote();
+    if (!note) { return; }
+    var wasOpen = note.classList.contains("open");
+    closeNote();
+    if (!wasOpen) {
+      note.classList.add("open");
+      this.setAttribute("aria-expanded", "true");
+      this.classList.add("info-btn-on");
+    }
+  });
+
+  document.addEventListener("click", function (e) {
+    if (e.target.closest(".view-note, #info-btn")) { return; }
+    closeNote();
+  });
 
   function showView(v) {
     Array.prototype.forEach.call(document.querySelectorAll(".view"), function (el) {
@@ -2116,6 +2176,9 @@
   function setView(v, delay) {
     if (!VIEW_META[v]) { v = "leads"; }
     if (typeof delay !== "number") { delay = 420; }
+    currentView = v;
+    closeNote();
+    $("info-btn").hidden = !document.querySelector('.view[data-view="' + v + '"] .view-note');
 
     Array.prototype.forEach.call(document.querySelectorAll(".view"), function (el) {
       el.hidden = true;
