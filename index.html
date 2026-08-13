@@ -912,8 +912,15 @@
     .search { flex: 1; }
     .search input { width: 100%; }
 
-    /* Search and Export get the full second row to themselves */
-    .topbar-actions .search { flex: 1; }
+    /* Screens with a search row put the buttons on that row, beside Export.
+       topbar-actions needs basis 0 and min-width 0 so it shrinks to make
+       space, otherwise the toggle wraps onto a row of its own. */
+    .topbar:has(.topbar-actions:not([hidden])) .topbar-heading { flex: 1 1 100%; }
+    .topbar:has(.topbar-actions:not([hidden])) .topbar-actions {
+      order: 2; width: auto; flex: 1 1 0; min-width: 0;
+    }
+    .topbar:has(.topbar-actions:not([hidden])) #info-btn,
+    .topbar:has(.topbar-actions:not([hidden])) #theme-toggle { order: 3; }
 
     /* Metrics become one swipeable row so the pipeline stays near the top */
     .stats {
