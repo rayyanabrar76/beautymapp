@@ -1187,61 +1187,7 @@
     </div>
 
     <div class="view" data-view="leads">
-    <section class="stats" aria-label="Summary">
-      <div class="tile">
-        <div class="tile-label">Leads received</div>
-        <div class="tile-row">
-          <div class="tile-value" id="s-leads">16</div>
-          <div class="tile-delta">+31% vs. July</div>
-        </div>
-        <svg class="tile-spark" viewBox="0 0 100 26" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M0 21 14 19 29 20 43 14 57 15 71 9 86 7 100 3 100 26 0 26Z" fill="var(--accent)" opacity=".13"/>
-          <polyline points="0,21 14,19 29,20 43,14 57,15 71,9 86,7 100,3" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
-          <circle cx="100" cy="3" r="2.2" fill="var(--accent)"/>
-        </svg>
-      </div>
-
-      <div class="tile">
-        <div class="tile-label">Consultations booked</div>
-        <div class="tile-row">
-          <div class="tile-value" id="s-booked">5</div>
-          <div class="tile-delta">+2 this week</div>
-        </div>
-        <svg class="tile-spark" viewBox="0 0 100 26" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M0 22 14 22 29 17 43 18 57 12 71 13 86 8 100 6 100 26 0 26Z" fill="var(--accent)" opacity=".13"/>
-          <polyline points="0,22 14,22 29,17 43,18 57,12 71,13 86,8 100,6" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
-          <circle cx="100" cy="6" r="2.2" fill="var(--accent)"/>
-        </svg>
-      </div>
-
-      <div class="tile">
-        <div class="tile-label">Lead → booking rate</div>
-        <div class="tile-row">
-          <div class="tile-value" id="s-rate">31<small>%</small></div>
-          <div class="tile-delta">+6 pts</div>
-        </div>
-        <svg class="tile-spark" viewBox="0 0 100 26" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M0 18 14 20 29 16 43 17 57 11 71 12 86 9 100 7 100 26 0 26Z" fill="var(--accent)" opacity=".13"/>
-          <polyline points="0,18 14,20 29,16 43,17 57,11 71,12 86,9 100,7" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
-          <circle cx="100" cy="7" r="2.2" fill="var(--accent)"/>
-        </svg>
-      </div>
-
-      <div class="tile">
-        <div class="tile-label">Median response time</div>
-        <div class="tile-row">
-          <div class="tile-value">4.2<small>h</small></div>
-          <div class="tile-delta flat">Target under 6h</div>
-        </div>
-        <svg class="tile-spark" viewBox="0 0 100 26" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M0 6 14 8 29 7 43 12 57 11 71 16 86 15 100 19 100 26 0 26Z" fill="var(--accent)" opacity=".13"/>
-          <polyline points="0,6 14,8 29,7 43,12 57,11 71,16 86,15 100,19" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
-          <circle cx="100" cy="19" r="2.2" fill="var(--accent)"/>
-        </svg>
-      </div>
-    </section>
-
-    <section class="panel" aria-label="Lead pipeline">
+        <section class="panel" aria-label="Lead pipeline">
       <div class="panel-head">
         <div>
           <h2>Lead pipeline</h2>
@@ -1911,9 +1857,6 @@
 
   function renderStats() {
     var booked = countBy("booked") + countBy("completed");
-    $("s-leads").textContent = LEADS.length;
-    $("s-booked").textContent = booked;
-    $("s-rate").innerHTML = Math.round(booked / LEADS.length * 100) + "<small>%</small>";
     $("nav-new").textContent = countBy("new");
     $("tab-dot").hidden = countBy("new") === 0;
 
