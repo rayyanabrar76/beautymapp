@@ -1274,42 +1274,42 @@
     <p class="disclaimer view-note">
       These figures come from your clinic, not from us. BeautyMApp does not see your calendar,
       your messages or your payments. A lead counts as booked or completed only when someone at
-      your clinic marks it so, and the treatment value is the one you confirm at completion.
-      Clinics that keep scheduling on their own phone and diary can use BeautyMApp exactly as before.
+      your clinic marks it so. Clinics that keep scheduling on their own phone and diary can use
+      BeautyMApp exactly as before.
     </p>
 
-    <section class="stats" aria-label="Revenue summary">
+    <section class="stats" aria-label="Performance summary">
       <div class="tile">
-        <div class="tile-label">Revenue attributed</div>
+        <div class="tile-label">Leads received</div>
         <div class="tile-row">
-          <div class="tile-value"><small>€</small>4,180</div>
-          <div class="tile-delta">+€1,240</div>
+          <div class="tile-value" id="p-leads">16</div>
+          <div class="tile-delta">+31% vs. July</div>
         </div>
-        <div class="tile-foot">Confirmed by your clinic on 5 leads</div>
+        <div class="tile-foot">Consultation requests sent to you</div>
       </div>
       <div class="tile">
-        <div class="tile-label">Average treatment value</div>
+        <div class="tile-label">Bookings</div>
         <div class="tile-row">
-          <div class="tile-value"><small>€</small>836</div>
-          <div class="tile-delta flat">Across all courses</div>
+          <div class="tile-value" id="p-booked">5</div>
+          <div class="tile-delta">+2 this week</div>
         </div>
-        <div class="tile-foot">Full course value you entered</div>
+        <div class="tile-foot">Marked booked or completed by you</div>
       </div>
       <div class="tile">
-        <div class="tile-label">Cost per booked lead</div>
+        <div class="tile-label">Conversion rate</div>
         <div class="tile-row">
-          <div class="tile-value"><small>€</small>29</div>
-          <div class="tile-delta">−€11 vs. July</div>
+          <div class="tile-value" id="p-rate">31<small>%</small></div>
+          <div class="tile-delta">+6 pts</div>
         </div>
-        <div class="tile-foot">Versus €140 on paid social</div>
+        <div class="tile-foot">Leads that became bookings</div>
       </div>
       <div class="tile">
-        <div class="tile-label">Return on spend</div>
+        <div class="tile-label">Median response time</div>
         <div class="tile-row">
-          <div class="tile-value">28<small>×</small></div>
-          <div class="tile-delta">+6×</div>
+          <div class="tile-value">4.2<small>h</small></div>
+          <div class="tile-delta flat">Target under 6h</div>
         </div>
-        <div class="tile-foot">Revenue per €1 of lead fees</div>
+        <div class="tile-foot">Faster replies convert better</div>
       </div>
     </section>
 
@@ -1916,6 +1916,10 @@
     $("s-rate").innerHTML = Math.round(booked / LEADS.length * 100) + "<small>%</small>";
     $("nav-new").textContent = countBy("new");
     $("tab-dot").hidden = countBy("new") === 0;
+
+    $("p-leads").textContent = LEADS.length;
+    $("p-booked").textContent = booked;
+    $("p-rate").innerHTML = Math.round(booked / LEADS.length * 100) + "<small>%</small>";
   }
 
   function renderBars() {
